@@ -11,11 +11,6 @@ public class MainController {
 		return "index";
 	}
 	
-	@GetMapping("/trainers")
-	public String showTrainers() {
-		return "trainers";
-	}
-	
 	@GetMapping("/fitnessEvents")
 	public String showFitnessEvents() {
 		return "fitnessEvents";
