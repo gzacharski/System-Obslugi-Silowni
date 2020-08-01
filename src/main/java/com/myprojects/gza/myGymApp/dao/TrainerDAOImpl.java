@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.myprojects.gza.myGymApp.entity.Trainer;
 
+@Repository
 public class TrainerDAOImpl implements TrainerDAO {
 	
 	@Autowired
@@ -29,5 +31,4 @@ public class TrainerDAOImpl implements TrainerDAO {
 		// TODO Auto-generated method stub
 
 	}
-
 }
