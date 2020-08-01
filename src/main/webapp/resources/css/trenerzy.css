@@ -1,0 +1,97 @@
+.container
+{	
+	max-width: 1440px;
+}
+
+.trener
+{
+	height: auto;
+	padding: 15px 15px 15px 15px;
+	background-color: #222930;
+	border-radius: 15px;
+	color: #FFFFFF;
+	font-size: 40px;
+	font-weight: 400;
+	opacity:0.75;
+	transition: all 0.5s ease-in-out;
+}
+
+.trener a
+{
+	text-decoration: none;
+	color: inherit;
+}
+
+.trener:hover
+{
+	opacity:1;
+}
+
+.trener_img
+{
+	overflow: hidden;
+	border-radius: 15px;
+}
+
+.overlay
+{
+	position: relative;
+}
+
+.overlay img
+{	
+	width: 100%;
+	height: 100%;
+	transition: all 0.5s ease-in-out;
+}
+
+.overlay .trener_img_info
+{	
+	position: absolute;
+	display: block;
+	background-color: #111;
+	bottom: 0px;
+	height: auto;
+	left: 0px;
+	opacity: 0;
+	width: 100%;
+	font-size: 20px;
+	text-align: center;
+	padding: 10px 10px 10px 10px;
+	transition: all 0.5s ease-in-out;
+}
+
+.trener:hover .trener_img_info
+{	
+	opacity: 0.8;
+}
+
+.trener:hover .trener_img img
+{	
+	-webkit-transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	transform: scale(1.05);
+}
+
+.trener_opis
+{	
+	border-radius: 5px;
+	font-size: 15px;
+	text-align: justify;
+}
+
+.trener_opis h2
+{
+	padding: 10px 10px 0px 10px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.trener_opis p
+{	
+	display: block;
+	font-size: 15px;
+	height: 90px;
+	overflow: hidden;
+	text-align: justify;
+}

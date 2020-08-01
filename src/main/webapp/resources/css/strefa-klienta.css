@@ -1,0 +1,13 @@
+.square
+{
+	padding: 20px 20px 20px 20px;
+	margin-top: 30px;
+	margin-left: 30px;
+	border-radius: 15px;
+	transition: all 0.3s ease-in-out;
+}
+
+.square:hover
+{
+	background-color:  #222930;
+}

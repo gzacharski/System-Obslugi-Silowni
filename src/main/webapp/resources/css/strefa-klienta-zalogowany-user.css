@@ -1,0 +1,169 @@
+.headerTile
+{
+	background-color: #1c74b2;
+	padding: 15px 20px 15px 20px;
+	text-align: left;
+	color: #ddd;
+	font-size: 21px;
+	letter-spacing: 5px;
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.headerButton
+{	
+	background-color: inherit;
+	border: none;
+	border-radius: inherit;
+	color: #ddd;
+	cursor: pointer;
+	padding: 5px 5px 5px 5px;
+	outline: none;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+	overflow: hidden;
+	height: 100%;
+}
+
+.buttonWrapper
+{
+	background-color: #1c74b2;
+	border-radius: 15px;
+	text-align: center;
+	transition: all 0.3s ease-in-out;
+}
+
+.buttonWrapper:hover
+{
+	background-color: #3095d3;
+}
+
+.tileButton
+{
+	background-color: inherit;
+	border: none;
+	border-radius: inherit;
+	color: #ddd;
+	cursor: pointer;
+	font-size: 36px;
+	font-weight: 400;
+	height: 200px;
+	letter-spacing: 5px;
+	padding: 5px 5px 5px 5px;
+	outline: none;
+	text-align: center;
+	vertical-align: middle;
+	white-space: normal;
+}
+
+/* do sprawdzenia klasy */
+
+.tile
+{
+	background-color: #1c74b2;
+	border-radius: 15px;
+	color: #ddd;
+	float: left;
+	font-size: 36px;
+	font-weight: 400;
+	height: 170px;
+	letter-spacing: 5px;
+	/* margin: 20px 20px 20px 20px;
+	padding: 50px 50px 50px 50px; */
+	text-align: center;
+	vertical-align: middle;
+	width: 360px;
+}
+
+.tile:hover
+{
+	background-color: #3095d3;
+	cursor: pointer;
+}
+
+.naglowek
+{
+	background-color: #1c74b2;
+	border-radius: 15px;
+	color: #ddd;
+	float: left;
+	font-size: 25px;
+	font-weight: 400;
+	height: 80px;
+	letter-spacing: 5px;
+	margin: 20px 20px 20px 20px;
+	padding: 20px 20px 20px 20px;
+	text-align: center;
+	vertical-align: middle;
+	width: 680px;
+}
+
+.newtile
+{
+	background-color: #1c74b2;
+	border-radius: 15px;
+	color: #ddd;
+	display: table-cell;
+	float: left;
+	font-size: 15px;
+	font-weight: 400;
+	height: 80px;
+	letter-spacing: 5px;
+	margin: 20px 20px 20px 20px;
+	padding: 20px 20px 20px 20px;
+	width: 160px;
+}
+
+.newtile p
+{
+	text-align: center;
+	vertical-align: middle;
+}
+
+.pasek
+{
+	background-color: #1c74b2;
+	border-radius: 10px;
+	font-size: 15px;
+	height: 40px;
+	margin: 10px 20px 10px 20px;
+	padding: 10px 20px 10px 20px;
+	width: 920px;
+}
+
+.content
+{
+	margin: 5px 20px 20px 20px;
+}
+
+.contentLeft
+{
+	/* height: 220px; */
+	display: inline-block;
+	float: left;
+	width: 600px;
+}
+
+.contentRight 
+{
+	float: left;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.contentRight img
+{
+	border-color: #1c74b2;
+	border-radius: 20px;
+	border-style: solid;
+	border-width: 5px;
+	height: 155px;
+	width: 250px;
+	
+}
+
+
+
+
+

@@ -1,0 +1,16 @@
+#container
+{
+	width: 1000px;
+	height: 620px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.square
+{
+	float: left;
+	padding: 50px 50px 50px 50px;
+	margin-left: 20px;
+	margin-right: 20px;
+	
+}

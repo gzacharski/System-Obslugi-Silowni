@@ -1,0 +1,123 @@
+.zajecia
+{
+	height: 205px;
+	padding: 10px 10px 10px 10px;
+	width: 980px;
+	background-color: #222930;
+	border-radius: 15px;
+	color: #FFFFFF;
+	font-size: 40px;
+	font-weight: 400;
+	margin-bottom: 25px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top:25px;
+	opacity:0.8;
+}
+
+.zajecia:hover
+{
+	opacity:1;
+}
+
+.zajecia_img
+{
+	float:left;
+	display: inline-block;
+	margin: 15px 15px 15px 15px;
+	width: 250px;
+	height: 175px;
+}
+
+.zajecia_img img
+{
+	border-radius: 15px;
+	height: 155px;
+	width: 250px;
+}
+
+.field
+{
+	margin: 15px 15px 15px 15px;
+	width: 670px;
+	float: left;
+	height: 175px;
+}
+
+.zajecia_opis
+{	
+	border-radius: 5px;
+	display: inline-block;
+	font-size: 15px;
+	height: 125px;
+	width: 670px;
+	overflow: hidden;
+	text-align: justify;
+	float: left;
+}
+
+.zajecia_opis p
+{
+	white-space: pre-line;
+	text-overflow: ellipsis;
+}
+
+.description{
+	height: 60px;
+}
+
+.tileButton
+{
+	background-color: #1c74b2;
+	border: none;
+	border-radius: 15px;
+	color: #ddd;
+	cursor: pointer;
+	float: left;
+	font-size: 36px;
+	font-weight: 400;
+	height: 270px;
+	letter-spacing: 5px;
+	margin: 20px 20px 20px 20px;
+	outline: none;
+	text-align: center;
+	vertical-align: middle;
+	width: 460px;
+	white-space: normal;
+}
+
+.tileButton:hover
+{
+	background-color: #3095d3;
+}
+
+.buttons
+{
+	float: left;
+	height: 50px;
+	width: 670px;
+	padding: 0px;
+	display: inline-block;
+	float: left;
+	font-size: 10px;
+}
+
+.singleButton
+{
+	width: 150px;
+    display: inline-block;
+    float: left;
+}
+
+.singleButtonGrafik
+{
+	margin: 10px 4px 10px 4px;
+	width: 100px;
+	height: 30px;
+	display: inline-block;
+	overflow: hidden;
+	text-align: justify;
+	border-color: darkred;
+	border: 2px;
+}
+
