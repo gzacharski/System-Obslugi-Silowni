@@ -28,6 +28,8 @@ public class Trainer {
 	@Column(name="image")
 	private String image;
 	
+	public Trainer() {}
+	
 	public Trainer(int id, String name, String surname, String description, String image) {
 		this.id = id;
 		this.name = name;

@@ -2,6 +2,8 @@ package com.myprojects.gza.myGymApp.dao;
 
 import java.util.List;
 
+import org.hibernate.query.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,8 +18,13 @@ public class TrainerDAOImpl implements TrainerDAO {
 	
 	@Override
 	public List<Trainer> getTrainers() {
-		// TODO Auto-generated method stub
-		return null;
+		Session currentSession=sessionFactory.getCurrentSession();
+		
+		Query<Trainer> theQuery=currentSession.createQuery("from Trainer",Trainer.class);
+		
+		List<Trainer> trainers=theQuery.getResultList();
+		
+		return trainers;
 	}
 
 	@Override
