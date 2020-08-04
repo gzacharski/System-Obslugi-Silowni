@@ -25,14 +25,14 @@
 		<meta name="keywords" content="system, obsługa, siłowni" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		
-		<link rel="stylesheet" href="resources/css/bootstrap.min.css">
-		<link rel="stylesheet" href="resources/css/main.css" type="text/css" />
-		<link rel="stylesheet" href="resources/css/header.css" type="text/css" />
-		<link rel="stylesheet" href="resources/css/footer.css" type="text/css" />
-		<link rel="stylesheet" href="resources/css/trenerzy.css" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main.css" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/header.css" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footer.css" type="text/css" />
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/trenerzy.css" type="text/css" />
 	
 		
-		<link rel="stylesheet" href="css/fontello.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontello.css">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 		
 	</head>
@@ -58,7 +58,7 @@
 
 										<div class="trener_img">
 											<div class="overlay">
-												<img src="${tempTrainer.image}" alt="trener">
+												<img src="${pageContext.request.contextPath}/resources/${tempTrainer.image}" alt="trener">
 												<span class="trener_img_info" href="#"><i class="icon-search"></i>Kliknij po więcej informacji</span>
 											</div>
 										</div>
@@ -86,7 +86,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
 			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
 			crossorigin="anonymous"></script>
-		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 
 		<footer>
 			<jsp:include page="myFooter.jsp"/>
@@ -97,6 +97,6 @@
 		<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
 			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
 			crossorigin="anonymous"></script>
-		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
 	</body>
 </html>

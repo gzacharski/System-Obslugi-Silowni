@@ -19,7 +19,7 @@
 				<a class="nav-link" href="${pageContext.request.contextPath}/workouts/list">Zajęcia</a>
 			</li>
 			<li>
-				<a class="nav-link" href="${pageContext.request.contextPath}/trainers">Trenerzy</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/trainers/list">Trenerzy</a>
 			</li>
 			<li>
 				<a class="nav-link" href="${pageContext.request.contextPath}/fitnessEvents">Grafik</a>
