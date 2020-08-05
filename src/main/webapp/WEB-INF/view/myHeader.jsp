@@ -31,7 +31,7 @@
 				<a class="nav-link" href="#">O siłowni</a>
 			</li>
 			<li>
-				<a class="nav-link" href="${pageContext.request.contextPath}/client">Strefa klienta</a>
+				<a class="nav-link" href="${pageContext.request.contextPath}/client/main">Strefa klienta</a>
 			</li>
 		</ul>
 		
