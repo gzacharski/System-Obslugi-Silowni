@@ -16,9 +16,14 @@ public class MainController {
 		return "fitnessEvents";
 	}
 	
-	@GetMapping("/client")
-	public String showClient() {
-		return "client-logging-page";
+	@GetMapping("/logIn")
+	public String showLogIn() {
+		return "log-in";
+	}
+	
+	@GetMapping("/signUp")
+	public String showSignUp() {
+		return "sign-up";
 	}
 	
 }
