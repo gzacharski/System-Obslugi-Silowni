@@ -10,8 +10,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "clients_details")
-public class ClientDetails {
+@Table(name = "user_details")
+public class UserDetails {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,12 +21,12 @@ public class ClientDetails {
 	@Column(name = "photo")
 	private String photo;
 	
-	@OneToOne(mappedBy = "clientDetails", cascade = CascadeType.ALL)
-	private Client client;
+	@OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
+	private User user;
 	
-	public ClientDetails() {};
+	public UserDetails() {};
 	
-	public ClientDetails(int id, String photo) {
+	public UserDetails(int id, String photo) {
 		this.id = id;
 		this.photo = photo;
 	}
@@ -47,16 +47,16 @@ public class ClientDetails {
 		this.photo = photo;
 	}
 
-	public Client getClient() {
-		return client;
+	public User getUser() {
+		return user;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
-		return "ClientDetails [id=" + id + ", photo=" + photo + ", client=" + client + "]";
+		return "UserDetails [id=" + id + ", photo=" + photo + ", client=" + user + "]";
 	}
 }

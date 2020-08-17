@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="client_address")
-public class ClientAddress {
+@Table(name="user_address")
+public class UserAddress {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,16 +28,16 @@ public class ClientAddress {
 	@Column(name="city")
 	private String city;
 	
-	public ClientAddress() {}
+	public UserAddress() {}
 
-	public ClientAddress(String street, String homeNumber, String postalCode, String city) {
+	public UserAddress(String street, String homeNumber, String postalCode, String city) {
 		this.street = street;
 		this.homeNumber = homeNumber;
 		this.postalCode = postalCode;
 		this.city = city;
 	}
 
-	public ClientAddress(int id, String street, String homeNumber, String postalCode, String city) {
+	public UserAddress(int id, String street, String homeNumber, String postalCode, String city) {
 		this.id = id;
 		this.street = street;
 		this.homeNumber = homeNumber;
@@ -86,7 +86,7 @@ public class ClientAddress {
 
 	@Override
 	public String toString() {
-		return "ClientAddress [id=" + id + ", street=" + street + ", homeNumber=" + homeNumber + ", postalCode="
+		return "UserAddress [id=" + id + ", street=" + street + ", homeNumber=" + homeNumber + ", postalCode="
 				+ postalCode + ", city=" + city + "]";
 	}
 

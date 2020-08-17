@@ -13,7 +13,7 @@ public class Equipment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="equipment_id")
 	private int id;
 	
 	@Column(name="quantity")

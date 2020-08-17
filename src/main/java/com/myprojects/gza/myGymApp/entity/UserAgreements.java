@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="client_agreements")
-public class ClientAgreements {
+@Table(name="user_agreements")
+public class UserAgreements {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +31,9 @@ public class ClientAgreements {
 	@Column(name="zgoda5")
 	private boolean agreement5;
 
-	public ClientAgreements() {}
+	public UserAgreements() {}
 	
-	public ClientAgreements(int id, boolean agreement1, boolean agreement2, boolean agreement3, boolean agreement4,
+	public UserAgreements(int id, boolean agreement1, boolean agreement2, boolean agreement3, boolean agreement4,
 			boolean agreement5) {
 		this.id = id;
 		this.agreement1 = agreement1;
@@ -89,7 +89,7 @@ public class ClientAgreements {
 
 	@Override
 	public String toString() {
-		return "ClientAgreements [id=" + id + ", agreement1=" + agreement1 + ", agreement2=" + agreement2
+		return "UserAgreements [id=" + id + ", agreement1=" + agreement1 + ", agreement2=" + agreement2
 				+ ", agreement3=" + agreement3 + ", agreement4=" + agreement4 + ", agreement5=" + agreement5 + "]";
 	}
 }

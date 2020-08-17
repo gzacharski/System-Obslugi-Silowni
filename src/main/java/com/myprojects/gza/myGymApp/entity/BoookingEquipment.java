@@ -25,15 +25,15 @@ public class BoookingEquipment {
 	@Column(name="equipment_id")
 	private int equipmentId;
 	
-	@Column(name="client_id")
-	private int clientId;
+	@Column(name="user_id")
+	private int userId;
 	
-	public BoookingEquipment(int id, String startTime, String endTime, int equipmentId, int clientId) {
+	public BoookingEquipment(int id, String startTime, String endTime, int equipmentId, int userId) {
 		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.equipmentId = equipmentId;
-		this.clientId = clientId;
+		this.userId = userId;
 	}
 	
 	public int getId() {
@@ -68,17 +68,17 @@ public class BoookingEquipment {
 		this.equipmentId = equipmentId;
 	}
 
-	public int getClientId() {
-		return clientId;
+	public int getUserId() {
+		return userId;
 	}
 
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 	@Override
 	public String toString() {
 		return "BoookingEquipment [bookingId=" + id + ", startTime=" + startTime + ", endTime=" + endTime
-				+ ", equipmentId=" + equipmentId + ", clientId=" + clientId + "]";
+				+ ", equipmentId=" + equipmentId + ", userId=" + userId + "]";
 	}
 }
