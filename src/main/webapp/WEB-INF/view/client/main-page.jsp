@@ -31,7 +31,7 @@
 
 	<body onload="setCurrentDate();">
 		<header>
-			<jsp:include page="myHeader.jsp"/>
+			<jsp:include page="/WEB-INF/view/myHeader.jsp"/>
 		</header>
 		<main>
 			<div class="container">
@@ -43,7 +43,7 @@
 							<div class="col-9">
 								<figure class="headerTile">
 									Witaj <security:authentication property="principal.username"/>
-									Jaki plan treningowy na dziś?
+									Jaki plan treningowy na dziś? - client
 									<!--  itaj ${client.name} ${sessionScope.client.surname} <br/>
 									Jaki plan treningowy na dziś? -->
 								</figure>
@@ -125,7 +125,7 @@
 			</div>
 		</main>
 		<footer>
-			<jsp:include page="myFooter.jsp"/>
+			<jsp:include page="/WEB-INF/view/myFooter.jsp"/>
 		</footer>
 		<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
 			integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" 

@@ -108,11 +108,13 @@
 							
 							<div class="col-12 col-lg-6">
 								<figure class="square">
-									<h1>Zarejestruj się</h1>
-									<p>Jeżeli jeszcze nie masz konta, a chcesz utworzyć - kliknij przycisk "Zarejestruj się"</p>
-									<td><a href="rejestracja.jsp">
-										<input type="button" value="Zarejestruj się"/>
-									</a></td>
+									<form:form action="${pageContext.request.contextPath}/register/form" method="get">
+										<h1>Zarejestruj się</h1>
+										<p>Jeżeli jeszcze nie masz konta, a chcesz utworzyć - kliknij przycisk "Zarejestruj się"</p>
+										<td>
+											<input type="submit" value="Zarejestruj się"/>
+										</td>
+									</form:form>
 								</figure>
 							</div>
 							
