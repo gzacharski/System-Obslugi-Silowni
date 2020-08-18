@@ -39,19 +39,19 @@ public class User {
 	@Column(name="password")
 	private String password;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_details_id")
 	private UserDetails userDetails;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_address_id")
 	private UserAddress userAddress;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name="user_agreements_id")
 	private UserAgreements userAgreements;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name="role_id"))
 	private Collection<Role> roles;

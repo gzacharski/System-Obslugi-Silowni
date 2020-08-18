@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.myprojects.gza.myGymApp.component.AppAuthenticationSuccessHandler;
+import com.myprojects.gza.myGymApp.component.AppLogoutSuccessHandler;
 import com.myprojects.gza.myGymApp.service.UserService;
 
 @Configuration
@@ -22,6 +23,9 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
 	private AppAuthenticationSuccessHandler appAuthenticationSuccessHandler;
+	
+	@Autowired
+	private AppLogoutSuccessHandler appLogoutSuccessHandler;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -50,7 +54,10 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 				.permitAll()
 			.and()
 				.logout()
+				//.logoutUrl("/perform_logout")
+				.logoutSuccessHandler(appLogoutSuccessHandler)
 				//.logoutSuccessUrl("/logIn")
+				.deleteCookies("JSESSIONID")
 				.permitAll()
 			.and()
 				.exceptionHandling()
