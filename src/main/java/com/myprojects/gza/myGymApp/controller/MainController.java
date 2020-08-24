@@ -36,18 +36,22 @@ public class MainController {
 		return "log-in";
 	}
 	
-	@GetMapping("/signUp")
-	public String showSignUp() {
-		return "sign-up";
-	}
+//	@GetMapping("/signUp")
+//	public String showSignUp() {
+//		return "sign-up";
+//	}
 	
 	@GetMapping("/trainers/list")
 	public String showTrainers(Model model) {
 		
 		List<Trainer> trainers=trainerService.getTrainers();
+		
 		model.addAttribute("trainers", trainers);
 		
-		return "trainers";
+		System.out.println(trainers.toString());
+		
+		//return "trainers";
+		return showIndex();
 	}
 	
 	@GetMapping("/workouts/list")
