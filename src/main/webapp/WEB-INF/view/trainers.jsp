@@ -64,7 +64,7 @@
 										</div>
 
 										<div class="trener_opis">
-											<h2>${tempTrainer.name} ${tempTrainer.surname}</h2>
+											<h2>${tempTrainer.user.name} ${tempTrainer.user.surname}</h2>
 											<p>${tempTrainer.description}</p>
 										</div>
 
