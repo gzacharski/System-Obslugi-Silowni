@@ -21,7 +21,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name="id", updatable = false,nullable = false, unique = true)
 	private int id;
 	
 	@Column(name="name")
@@ -51,7 +51,7 @@ public class User {
 	@JoinColumn(name="user_agreements_id")
 	private UserAgreements userAgreements;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_roles",joinColumns = @JoinColumn(name="user_id"),
 				inverseJoinColumns = @JoinColumn(name="role_id"))
 	private Collection<Role> roles;
@@ -80,6 +80,13 @@ public class User {
 		this.surname = surname;
 		this.email = email;
 		this.telephone=telephone;
+	}
+	
+	public User(int id, String name, String surname, String email) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.email = email;
 	}
 
 	public User(int id, String name, String surname, String email, String telephone, String password,

@@ -1,10 +1,8 @@
 package com.myprojects.gza.myGymApp.service;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -15,7 +13,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.myprojects.gza.myGymApp.dao.RoleDAO;
@@ -87,14 +84,22 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	@Transactional
 	public List<User> getAllUsers() {
-		
-		List<User> users=new ArrayList<User>();
-		
-		users=userDao.getAllUsers();
-		
+		return userDao.getAll();
+	}
 
-		return userDao.getAllUsers();
+	@Override
+	@Transactional
+	public User getById(int id) {
+		// TODO Auto-generated method stub
+		return userDao.getById(id);
+	}
+
+	@Override
+	@Transactional
+	public void save(User user) {
+		userDao.save(user);
 	}
 
 	

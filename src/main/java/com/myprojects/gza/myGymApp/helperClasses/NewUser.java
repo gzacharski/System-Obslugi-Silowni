@@ -12,11 +12,11 @@ import com.myprojects.gza.myGymApp.validation.ValidTelephoneNumber;
 })
 public class NewUser {
 	@NotNull(message ="Field is required.")
-	@Size(min = 5, max = 32, message = "Field is required. Type from 5 to 32 characters.")
+	@Size(min = 3, max = 32, message = "Field is required. Type from 3 to 32 characters.")
 	private String name;
 	
 	@NotNull(message ="Field is required.")
-	@Size(min = 5, max = 32, message = "Field is required. Type from 5 to 32 characters.")
+	@Size(min = 3, max = 32, message = "Field is required. Type from 3 to 32 characters.")
 	private String surname;
 	
 	@ValidTelephoneNumber(message = "Field is optional")

@@ -20,6 +20,7 @@ public class TrainerServiceImpl implements TrainerService{
 	@Transactional
 	public List<Trainer> getTrainers() {
 		List<Trainer> trainers=trainerDAO.getTrainers();
+		
 		return trainers;
 	}
 
