@@ -7,10 +7,9 @@
 
 <!DOCTYPE html>
 <html lang="pl">
-
 	<head>
 		<meta charset="UTF-8">
-		<title>Strefa Admina</title>
+		<title>Strefa Admina - Edytuj trening</title>
 
 		<meta name="description" content="System obsługi twojej siłowni" />
 		<meta name="keywords" content="system, obsługa, siłowni" />
@@ -23,65 +22,73 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/strefa-klienta-zalogowany-user.css" type="text/css" />
 		
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontello.css">
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" >
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+		
 	</head>
-	
 	<body>
-	
 		<header>
 			<jsp:include page="/WEB-INF/view/myHeader.jsp"/>
 		</header>
-		
 		<main>
 			<div class="container">
 			
-				<div class="row">
-					
+				<div class="row">	
+				
 					<div class="headerTile col-12">
-						Edytuj użytkownika<br/>
+						Edytuj typ treningu
 					</div>
-					<div style="clear:both;"></div>
 					
-						<c:if test="${hasBeenSaved == true}">
-							<div class="alert alert-danger col-xs-offset-1 col-xs-10">
-								Dane zostały zaktualizowane.
-							</div>
-						</c:if>
-					
-						<form:form action="${pageContext.request.contextPath}/user/admin/editUser/save" modelAttribute="user" method="post">
-						
-					        <form:hidden path="id"/>
-					        
-							<table border="1" cellpadding="5" style="width: 100%">
-							
-					            <tr>
-					                <th>Imię</th>
-					                <th>Nazwisko</th>
-					                <th>Email</th>
-					            </tr>
-					            
-				                <tr>
-				                    <td><form:input path="name"/></td>
-				                    <td><form:input path="surname"/></td>
-				                    <td><form:input path="email"/></td>
-				                </tr>
- 
-					        </table>
-
-							<div class="button">
-									<input type="submit" value="Zapisz" class="tileButton">
-							</div>
-							
-				        </form:form>
-				        
-						<div class="button">
-							<form:form action="${pageContext.request.contextPath}/user/admin/listOfUsers" method="get"> 
-								<input type="submit" value="Wróć" class="tileButton">
-							</form:form>
+					<c:if test="${info != null}">
+						<div class="alert alert-success alert-dismissible fade show" role="alert" >
+							${info}
 						</div>
-						
+					</c:if>
+					
+					<c:if test="${warning != null}">
+						<div class="alert alert-warning alert-dismissible fade show" role="alert" >
+							${warning}
+						</div>
+					</c:if>
+					
+					<form:form id="saveForm" action="${pageContext.request.contextPath}/user/admin/workouts/edit" modelAttribute="workout" method="post">
+						<form:hidden path="id"/>
+						<table>
+							<tbody>
+								<tr>
+									<td><label>Typ treningu: </label></td>
+									<td><form:input path="typeOfWorkout" type="text" name="typeOfWorkout"/></td>
+								</tr>
+								<tr>
+									<td><label>Opis: </label></td>
+									<td><form:textarea path="description" name="description" rows="4" cols="80" maxlength="255" minlength="0"/></td>
+								</tr>
+								<tr>
+									<td><label>Zdjęcie: </label></td>
+									<td><form:input path="image" type="text" name="image"/></td>
+								</tr>
+								<tr>
+									<td><label>Czas trwania treningu: </label></td>
+									<td><form:input path="duration" type="time" name="duration" step="1"/></td>
+								</tr>
+							</tbody>
+						</table>
+					</form:form>
 				</div>
 				
+				<div class="row">
+		   
+			       <div class="d-flex justify-content-between col-12">
+				       	<form:form action="${pageContext.request.contextPath}/user/admin/workouts" method="get"> 
+							<button type="submit" class="btn btn-secondary float-left">Powrót</button>
+						</form:form>
+				     	
+						<form:form>
+							<button type="submit" class="btn btn-secondary float-right" form="saveForm">Zapisz zmiany</button> 
+						</form:form>
+					</div>
+					
+				</div>
+						
 			</div>
 		</main>
 		
@@ -96,6 +103,5 @@
 			integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
 			crossorigin="anonymous"></script>
 		<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-		
 	</body>
 </html>

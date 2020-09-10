@@ -1,25 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-<% 
-	
-	response.setHeader("Cache-Control","no-cache");
-	response.setHeader("Cache-Control","no-store"); 
-	response.setDateHeader("Expires", 0); 
-	response.setHeader("Pragma","no-cache");
-	
-	//if(session.getAttribute("client")==null) response.sendRedirect("strefa-klienta.jsp");
-%> 
-   
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
     
 <!DOCTYPE html>
 <html lang="pl">
-<html>
 	<head>
-		<meta charset="UTF-16">
-		<title>System Obsługi siłowni</title>
-
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta charset="UTF-8">
+		<title>Trenerzy</title>
 
 		<meta name="description" content="System obsługi twojej siłowni" />
 		<meta name="keywords" content="system, obsługa, siłowni" />
@@ -31,7 +18,6 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/footer.css" type="text/css" />
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/trenerzy.css" type="text/css" />
 	
-		
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/fontello.css">
 		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
 		
