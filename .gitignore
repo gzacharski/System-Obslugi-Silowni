@@ -4,3 +4,4 @@ target/
 .project
 *.properties
 TestDbServlet.java
+database-backup*/
