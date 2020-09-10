@@ -1,12 +1,17 @@
 package com.myprojects.gza.myGymApp.entity;
 
+import javax.annotation.Nonnegative;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+
+import com.myprojects.gza.myGymApp.validation.AcceptableiImageFileExtension;
 
 @Entity
 @Table(name="gym_equipments")
@@ -18,12 +23,16 @@ public class Equipment {
 	private int id;
 	
 	@NotNull
+	@Nonnegative
+	@Min(value = 1)
+	@Max(value = 99)
 	@Column(name="quantity")
 	private int quantity;
 	
 	@Column(name = "description")
 	private String description;
 	
+	@AcceptableiImageFileExtension
 	@Column(name="photo")
 	private String photo;
 	
@@ -32,18 +41,20 @@ public class Equipment {
 	private String name;
 	
 	public Equipment() {}
+	
+	public Equipment(@NotNull @Nonnegative int quantity, String description, @AcceptableiImageFileExtension String photo, @NotNull String name) {
+		this.quantity = quantity;
+		this.description = description;
+		this.photo = photo;
+		this.name = name;
+	}
 
-	public Equipment(int id, int quantity, String description, String photo) {
+	public Equipment(int id, @NotNull @Nonnegative int quantity, String description, @AcceptableiImageFileExtension String photo, @NotNull String name) {
 		this.id = id;
 		this.quantity = quantity;
 		this.description = description;
 		this.photo = photo;
-	}
-
-	public Equipment(int quantity, String description, String photo) {
-		this.quantity = quantity;
-		this.description = description;
-		this.photo = photo;
+		this.name = name;
 	}
 
 	public int getId() {
@@ -78,9 +89,17 @@ public class Equipment {
 		this.photo = photo;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	@Override
 	public String toString() {
-		return "Equipment [equipmentId=" + id + ", quantity=" + quantity + ", description=" + description
-				+ ", photo=" + photo + "]";
-	}
+		return "Equipment [id=" + id + ", quantity=" + quantity + ", description=" + description + ", photo=" + photo
+				+ ", name=" + name + "]";
+	}	
 }
