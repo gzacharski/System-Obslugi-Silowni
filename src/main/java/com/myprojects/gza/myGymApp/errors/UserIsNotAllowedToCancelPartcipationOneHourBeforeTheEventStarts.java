@@ -1,7 +1,5 @@
 package com.myprojects.gza.myGymApp.errors;
 
-import com.myprojects.gza.myGymApp.entity.RemovalOfUserFromFitnessEventException;
-
 public class UserIsNotAllowedToCancelPartcipationOneHourBeforeTheEventStarts
 		extends RemovalOfUserFromFitnessEventException {
 

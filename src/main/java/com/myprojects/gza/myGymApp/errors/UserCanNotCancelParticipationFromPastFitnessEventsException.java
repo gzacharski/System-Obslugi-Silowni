@@ -1,7 +1,5 @@
 package com.myprojects.gza.myGymApp.errors;
 
-import com.myprojects.gza.myGymApp.entity.RemovalOfUserFromFitnessEventException;
-
 public class UserCanNotCancelParticipationFromPastFitnessEventsException extends RemovalOfUserFromFitnessEventException {
 
 	private static final long serialVersionUID = -3213464197078833504L;
