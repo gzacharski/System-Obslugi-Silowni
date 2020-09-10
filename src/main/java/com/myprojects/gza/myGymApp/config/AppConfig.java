@@ -12,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -29,9 +30,11 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableTransactionManagement
 @EnableWebMvc
 @ComponentScan("com.myprojects.gza.myGymApp")
-@PropertySource({ "classpath:persistence-mysql.properties" })
+@PropertySources({
+	@PropertySource("classpath:persistence-mysql.properties")
+})
 public class AppConfig implements WebMvcConfigurer{
-	
+
 	@Autowired
 	private Environment env;
 	
@@ -96,10 +99,10 @@ public class AppConfig implements WebMvcConfigurer{
 		
 		properties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
 		properties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		properties.setProperty("hibernate.jdbc.time_zone", env.getProperty("hibernate.jdbc.time_zone"));
 		
 		return properties;
 	}
-	
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {

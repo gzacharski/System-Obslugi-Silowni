@@ -1,6 +1,10 @@
 package com.myprojects.gza.myGymApp.config;
 
+import javax.servlet.Filter;
+
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import com.myprojects.gza.myGymApp.filter.ErrorHandlerFilter;
 
 public class AppDispatcherServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -17,6 +21,12 @@ public class AppDispatcherServletInitializer extends AbstractAnnotationConfigDis
 	@Override
 	protected String[] getServletMappings() {
 		return new String[] {"/"};
+	}
+
+	@Override
+	protected Filter[] getServletFilters() {
+		return new Filter[] {};
+		//return new Filter[] {new ErrorHandlerFilter()};
 	}
 
 }
