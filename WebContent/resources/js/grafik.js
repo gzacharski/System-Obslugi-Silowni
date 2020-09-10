@@ -2,7 +2,7 @@ const lightbox=document.createElement('div')
 lightbox.id='lightbox'
 document.body.appendChild(lightbox)
 
-const workouts=document.querySelectorAll('.zajecia')
+const workouts=document.querySelectorAll('.zajecia_inner')
 workouts.forEach(workout =>{
   workout.addEventListener('click', e=>{
     lightbox.classList.add('active')
@@ -89,61 +89,6 @@ workouts.forEach(workout =>{
         placeName.appendChild(placeNameHeader)
         placeName.appendChild(placeNameContent)
 
-//Button Zapisz się
-        let buttonJoinInput1=document.createElement('input')
-        buttonJoinInput1.setAttribute('type','hidden')
-        buttonJoinInput1.setAttribute('name','command')
-        buttonJoinInput1.setAttribute('value','JOIN_EVENT')
-
-        let buttonJoinInput2=document.createElement('input')
-        buttonJoinInput2.setAttribute('type','hidden')
-        buttonJoinInput2.setAttribute('name','classId')
-        buttonJoinInput2.setAttribute('value',workout.querySelector('form input[id=classId]').value)
-
-        let buttonJoinInput3=document.createElement('input')
-        buttonJoinInput3.setAttribute('type','submit')
-        buttonJoinInput3.setAttribute('value','Dołącz')
-        buttonJoinInput3.setAttribute('class','singleButton')
-
-        let buttonJoinForm=document.createElement('form')
-        buttonJoinForm.setAttribute('action','FitnessEvents')
-        buttonJoinForm.setAttribute('method','post')
-        buttonJoinForm.appendChild(buttonJoinInput1)
-        buttonJoinForm.appendChild(buttonJoinInput2)
-        buttonJoinForm.appendChild(buttonJoinInput3)
-    
-        let buttonJoin=document.createElement('div')
-        buttonJoin.classList.add('singleButtonGrafik')
-        buttonJoin.appendChild(buttonJoinForm)
-
-//Button Anuluj
-        let buttonCancelInput1=document.createElement('input')
-        buttonCancelInput1.setAttribute('type','hidden')
-        buttonCancelInput1.setAttribute('name','command')
-        buttonCancelInput1.setAttribute('value','CANCEL_WORKOUT')
-
-        let buttonCancelInput2=document.createElement('input')
-        buttonCancelInput2.setAttribute('type','hidden')
-        buttonCancelInput2.setAttribute('name','classId')
-        buttonCancelInput2.setAttribute('value',workout.querySelector('form input[id=classId]').value)
-
-        let buttonCancelInput3=document.createElement('input')
-        buttonCancelInput3.setAttribute('type','submit')
-        buttonCancelInput3.setAttribute('value','Zrezygnuj')
-        buttonCancelInput3.setAttribute('class','singleButton')
-
-        let buttonCancelForm=document.createElement('form')
-        buttonCancelForm.setAttribute('action','FitnessEvents')
-        buttonCancelForm.setAttribute('method','post')
-        buttonCancelForm.appendChild(buttonCancelInput1)
-        buttonCancelForm.appendChild(buttonCancelInput2)
-        buttonCancelForm.appendChild(buttonCancelInput3)
-
-        let buttonCancel=document.createElement('div')
-        buttonCancel.classList.add('singleButtonGrafik')
-        buttonCancel.appendChild(buttonCancelForm)
-
-
 //Kontener dla opisu
     let zajeciaOpisDiv=document.createElement('div')
     zajeciaOpisDiv.classList.add('zajecia_opis')
@@ -152,8 +97,6 @@ workouts.forEach(workout =>{
     zajeciaOpisDiv.appendChild(trener)
     zajeciaOpisDiv.appendChild(maxPeople)
     zajeciaOpisDiv.appendChild(placeName)
-    zajeciaOpisDiv.appendChild(buttonJoin)
-    zajeciaOpisDiv.appendChild(buttonCancel)
 
 
     let eventWorkout=document.createElement('div')
@@ -173,11 +116,3 @@ lightbox.addEventListener('click', e => {
   if (e.target !== e.currentTarget) return
   lightbox.classList.remove('active')
 })
-
-function previousWeek(){
-
-}
-
-function nextWeek(){
-
-}
