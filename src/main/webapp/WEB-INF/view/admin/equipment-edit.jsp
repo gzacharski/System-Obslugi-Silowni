@@ -32,61 +32,55 @@
 		</header>
 		
 		<main>
+		
 			<div class="container">
-				
-				<div class="headerTile my-2">
-					Lista dostępnego sprzętu<br/>
-				</div>
-				
-				<div class="d-flex justify-content-between col-12 my-2">
-					<form:form action="${pageContext.request.contextPath}/user/admin/equipment/add" method="get">
-						<input type="submit" value="Dodaj sprzęt" class="btn myButton float-left">
-					</form:form>
-				</div>
-						
+			
 				<div class="row">
-					
-					<table class="table table-striped table-hover table-dark">
-			            <tr>
-			                <th>ID</th>
-			                <th>Nazwa</th>
-			                <th>Dostępna ilość</th>
-			                <th>Zarządzaj</th>
-			            </tr>
-			            
-			            <c:forEach var="equipment" items="${equipments}">
-			            
-			            	<c:url var="editEquipment" value="/user/admin/equipment/edit">
-								<c:param name="equipmentId" value="${equipment.id}" />
-							</c:url>
-							
-							<c:url var="deleteEquipment" value="/user/admin/equipment/delete">
-								<c:param name="equipmentId" value="${equipment.id}" />
-							</c:url>
-			            	
-			                <tr>
-			                    <td>${equipment.id}</td>
-			                    <td>${equipment.name}</td>
-			                    <td>${equipment.quantity}</td>
-			                    <td>
-			                    	<a href="${editEquipment}" class="btn btn-info">Edytuj</a>
-			                    	<a href="${deleteEquipment}" class="btn btn-warning"
-			                    		onclick="if(!(confirm('Are you sure you want to delete this workout?'))) return false">
-			                    		Usuń
-			                    	</a>
-			                    </td>
-			                </tr>
-			            </c:forEach>
-			            
-			        </table>
-			        
-					<div class="button my-2">
-						<form:form action="${pageContext.request.contextPath}/user/admin/main" method="get"> 
-							<input type="submit" value="Wróć" class="btn myButton">
-						</form:form>
+				 
+					<div class="headerTile col-12 my-2">
+						Edytuj sprzęt<br/>
 					</div>
+						
+					<form:form id="saveForm" action="${pageContext.request.contextPath}/user/admin/equipment/edit" modelAttribute="equipment" method="post">
+						<form:hidden path="id"/>
+						<table>
+							<tbody>
+								<tr>
+									<td><label>Nazwa sprzętu:</label></td>
+									<td><form:input path="name" type="text" name="name"/></td>
+								</tr>
+								<tr>
+									<td><label>Dostępna ilość sprzętu:</label></td>
+									<td><form:input path="quantity" type="number" name="quantity" step="1" min="0" max="100"/></td>
+								</tr>
+								<tr>
+									<td><label>Zdjęcie: </label></td>
+									<td><form:input path="photo" type="text" name="photo"/></td>
+								</tr>
+								<tr>
+									<td><label>Opis: </label></td>
+									<td><form:textarea path="description" rows="4" cols="80" maxlength="255" minlength="10"></form:textarea></td>
+								</tr>
+							</tbody>
+						</table>
+					</form:form>
 					
 				</div>
+					
+				<div class="row">
+			       <div class="d-flex justify-content-between col-12 my-2">
+			       
+				       	<form:form action="${pageContext.request.contextPath}/user/admin/equipment" method="get"> 
+							<button type="submit" class="btn myButton float-left">Powrót</button>
+						</form:form>
+				     	
+						<form:form>
+							<button type="submit" class="btn myButton float-right" form="saveForm">Zapisz zmiany</button> 
+						</form:form>
+						
+					</div>
+				</div>
+				
 			</div>
 		</main>
 		

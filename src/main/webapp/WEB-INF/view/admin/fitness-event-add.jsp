@@ -37,7 +37,7 @@
 			
 				<div class="row">
 				 
-					<div class="headerTile col-12">
+					<div class="headerTile col-12 my-2">
 						Dodaj nowe zajęcia<br/>
 					</div>
 						

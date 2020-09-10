@@ -35,11 +35,11 @@
 		
 			<div class="container">
 				
-				<div class="headerTile">
+				<div class="headerTile my-2">
 					Lista dostępnych wydarzeń<br/>
 				</div>
 				
-				<div class="d-flex justify-content-between col-12">
+				<div class="d-flex justify-content-between col-12 my-2">
 					<form:form action="${pageContext.request.contextPath}/user/admin/events/add" method="get">
 						<input type="submit" value="Dodaj trening" class="btn btn-primary float-left">
 					</form:form>

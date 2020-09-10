@@ -37,7 +37,7 @@
 			
 				<div class="row">
 				 
-					<div class="headerTile col-12">
+					<div class="headerTile col-12 my-2">
 						Edytuj zajęcia<br/>
 					</div>
 					
@@ -107,7 +107,7 @@
 				</div>
 					
 				<div class="row">
-			       <div class="d-flex justify-content-between col-12">
+			       <div class="d-flex justify-content-between col-12 my-2">
 			       
 				       	<form:form action="${pageContext.request.contextPath}/user/admin/events" method="get"> 
 							<button type="submit" class="btn btn-secondary float-left">Powrót</button>
