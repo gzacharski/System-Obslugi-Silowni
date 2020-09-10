@@ -59,32 +59,4 @@ public class AnalyticsAspect {
 		
 		pageService.saveOrUpdate(tempPage);
 	}
-	
-	
-//	@After("execution(* com.myprojects.gza.myGymApp.controller.ClientController.showMainPage(..))") 
-//	public void registerUserLogInTimeStamp(JoinPoint theJoinPoint) {
-//  
-//		logger.info("Executing Analytics: ");
-//	  
-//		MethodSignature methodSignature=(MethodSignature) theJoinPoint.getSignature();
-//	  
-//		logger.info(methodSignature.toShortString());
-//	  
-//		String userEmail=SecurityContextHolder.getContext().getAuthentication().getName();
-//	  
-//		User theUser=userService.findByEmail(userEmail);
-//	
-//		UserTimestamp userTimestamp=new UserTimestamp(UserAction.LogIn,LocalDateTime.now(),theUser.getId());
-//	  
-//		userAnalyticsService.save(userTimestamp);
-//	  
-//		logger.info(userTimestamp.toString());
-//  
-//	 }
-	
-	 
-	 
-	
-	
-	
 }
