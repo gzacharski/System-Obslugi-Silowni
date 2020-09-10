@@ -84,11 +84,10 @@ public class PlaceDAOImpl implements PlaceDAO{
 		
 		Session currentSession=sessionFactory.getCurrentSession();
 		
-		Query<Place> query=currentSession.createQuery("delete from Place where id=:placeId", Place.class);
-		query.setParameter("placeId", id);
-		
 		try {
-			query.executeUpdate();
+			Place tempPlace=currentSession.load(Place.class, id);
+			currentSession.delete(tempPlace);
+			currentSession.flush();
 		}catch(Exception e) {
 			return false;
 		}
@@ -121,7 +120,4 @@ public class PlaceDAOImpl implements PlaceDAO{
 		
 		return searchedPlaces;
 	}
-
-	
-	
 }

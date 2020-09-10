@@ -27,11 +27,16 @@ public class UserDAOImpl implements UserDAO {
 		
 		Session currentSession=sessionFactory.getCurrentSession();
 		
-		Query<User> theQuery=currentSession.createQuery("delete from User where id=:userId", User.class);
-		theQuery.setParameter("userId", id);
-		
+		//Query<User> theQuery=currentSession.createQuery("delete from User where id=:userId", User.class);
+		//Query query1=currentSession.createQuery("delete from Password where id=:userId");
+		Query query2=currentSession.createQuery("delete from User where id=:userId");
+		//theQuery.setParameter("userId", id);
+		//query1.setParameter("userId", id);
+		query2.setParameter("userId", id);
 		try {
-			theQuery.executeUpdate();
+			//theQuery.executeUpdate();
+			//query1.executeUpdate();
+			query2.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -128,10 +133,14 @@ public class UserDAOImpl implements UserDAO {
 		
 		Session currentSession=sessionFactory.getCurrentSession();
 		
+		logger.info(user.toString());
+		logger.info(user.getPassword().getPassword());
+
 		try {
 			currentSession.saveOrUpdate(user);
 		} catch (Exception e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("bład");
 			return false;
 		}
 		
@@ -147,18 +156,28 @@ public class UserDAOImpl implements UserDAO {
 		
 		if(searchedPhrase!=null && searchedPhrase.trim().length()>0) {
 			theQuery=currentSession.createQuery("from User where lower(name) like :theSearchName "
-					+ "or lower(surname) like :theSearchNam or lower(email) like :theSearchNam", User.class);
+					+ "or lower(surname) like :theSearchName or lower(email) like :theSearchName", User.class);
 			theQuery.setParameter("theSearchName", "%"+searchedPhrase+"%");
-		}else {
-			
 		}
 		
-		return null;
+		return theQuery.getResultList();
 	}
 
 	@Override
 	public boolean update(User user) {
 		
-		return save(user);
+		if(user==null) return false;
+		
+		Session currentSession=sessionFactory.getCurrentSession();
+
+		try {
+			currentSession.saveOrUpdate(user);
+		} catch (Exception e) {
+			System.out.println("bład");
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 }

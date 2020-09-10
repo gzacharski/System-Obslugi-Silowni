@@ -29,13 +29,63 @@ public class TrainerDAOImpl implements TrainerDAO {
 
 	@Override
 	public Trainer getTrainer(int trainerId) {
-		// TODO Auto-generated method stub
-		return null;
+		Session currentSession=sessionFactory.getCurrentSession();
+		
+		return currentSession.get(Trainer.class, trainerId);
 	}
 
 	@Override
 	public void deleteTrainer(int trainerId) {
-		// TODO Auto-generated method stub
+		
+		if(trainerId<=0) throw new IllegalArgumentException("Trainer id can't be lower or equal than 0");
+		
+		Session currentSession=sessionFactory.getCurrentSession();
+		
+		currentSession.delete(getTrainer(trainerId));
+	}
 
+	@Override
+	public List<Trainer> searchTrainer(String searchedPhrase) {
+
+		Session currentSession=sessionFactory.getCurrentSession();
+		
+		Query<Trainer> theQuery=null;
+
+		if(searchedPhrase!=null && searchedPhrase.trim().length()>0) {
+			theQuery=currentSession.createQuery("from Trainer where"
+					+ " description like :theSearchedPhrase"
+					+ " or user.name like :theSearchedPhrase"
+					+ " or user.surname like :theSearchedPhrase"
+					+ " or user.email like :theSearchedPhrase", Trainer.class);
+			theQuery.setParameter("theSearchedPhrase", "%"+searchedPhrase+"%");
+		}
+		
+		List<Trainer> searchedTrainers=theQuery.getResultList();
+		
+		System.out.println(searchedTrainers.toString());
+		
+		return searchedTrainers;
+	}
+
+	@Override
+	public boolean saveTrainer(Trainer trainer) {
+		
+		if(trainer==null) return false;
+		
+		Session currentSession=sessionFactory.getCurrentSession();
+
+		try {
+			currentSession.saveOrUpdate(trainer);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean updateTrainer(Trainer trainer) {
+		return saveTrainer(trainer);
 	}
 }
