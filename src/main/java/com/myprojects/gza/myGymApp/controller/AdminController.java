@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +16,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.myprojects.gza.myGymApp.entity.Equipment;
 import com.myprojects.gza.myGymApp.entity.FitnessEvent;
 import com.myprojects.gza.myGymApp.entity.Place;
 import com.myprojects.gza.myGymApp.entity.Trainer;
 import com.myprojects.gza.myGymApp.entity.User;
 import com.myprojects.gza.myGymApp.entity.Workout;
+import com.myprojects.gza.myGymApp.errors.ThereIsNoSuchAnEquipmentException;
+import com.myprojects.gza.myGymApp.service.EquipmentService;
 import com.myprojects.gza.myGymApp.service.FitnessEventService;
 import com.myprojects.gza.myGymApp.service.PlaceService;
 import com.myprojects.gza.myGymApp.service.TrainerService;
@@ -45,6 +48,9 @@ public class AdminController {
 	
 	@Autowired
 	private FitnessEventService fitnessEventService;
+	
+	@Autowired
+	private EquipmentService equipmentService;
 	
 	@GetMapping("/main")
 	public String showMainPage() {
@@ -416,6 +422,80 @@ public class AdminController {
 		}
 		
 		return showFitnessEvents(model);
+	}
+	
+	@GetMapping("/equipment")
+	public String showEquipment(Model model) {
+		
+		List<Equipment> equipments=equipmentService.getAll();
+		
+		if(equipments.size()==0) {
+			model.addAttribute("info", "Brak dodanego sprzętu.");
+		}
+		
+		model.addAttribute("equipments", equipments);
+		
+		return "admin/equipment-list";
+	}
+	
+	@GetMapping("/equipment/add")
+	public String showFormToAddEquipment(Model model) {
+		
+		model.addAttribute("equipment", new Equipment());
+		
+		return "admin/equipment-add";
+	}
+	
+	@PostMapping("/equipment/add")
+	public String saveFormToAddEquipment(@Valid @ModelAttribute("equipment") Equipment equipment, Model model) {
+		
+		try {
+			equipmentService.save(equipment);
+			model.addAttribute("info", "Pomyślnie dodano nowy sprzęt.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("warning", "Wystąpił problem z dodaniem nowego sprzętu.");
+		}
+
+		return showEquipment(model);
+	}
+	
+	@GetMapping("/equipment/edit")
+	public String showFormToEditEquipment(@RequestParam("equipmentId") int id, Model model) {
+		
+		Equipment equipment=equipmentService.getById(id);
+		
+		model.addAttribute("equipment", equipment);
+		
+		return "admin/equipment-edit";
+	}
+	
+	@PostMapping("/equipment/edit")
+	public String saveFormToEditEquipment(@Valid @ModelAttribute("equipment") Equipment equipment, Model model) {
+		
+		try {
+			equipmentService.update(equipment);
+			model.addAttribute("info", "Pomyślnie zaktualizowano sprzęt.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("warning", "Wystąpił problem z aktualizacją sprzętu.");
+		}
+		
+		return "admin/equipment-edit";
+	}
+	
+	@GetMapping("/equipment/delete")
+	public String deleteEditEquipment(@RequestParam("equipmentId") int id, Model model) {
+		
+		try {
+			equipmentService.delete(id);
+			model.addAttribute("info", "Sprzęt został usunięty.");
+		} catch (ThereIsNoSuchAnEquipmentException e) {
+			e.printStackTrace();
+			model.addAttribute("warning", "Wystąpił problem z usunięciem sprzętu.");
+		}
+		
+		return showEquipment(model);
 	}
 
 }

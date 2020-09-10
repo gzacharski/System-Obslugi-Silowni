@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myprojects.gza.myGymApp.captcha.ICaptchaService;
+import com.myprojects.gza.myGymApp.entity.Equipment;
 import com.myprojects.gza.myGymApp.entity.FitnessEvent;
 import com.myprojects.gza.myGymApp.entity.Trainer;
 import com.myprojects.gza.myGymApp.entity.Workout;
+import com.myprojects.gza.myGymApp.service.EquipmentService;
 import com.myprojects.gza.myGymApp.service.FitnessEventService;
 import com.myprojects.gza.myGymApp.service.TrainerService;
 import com.myprojects.gza.myGymApp.service.WorkoutService;
@@ -36,6 +38,9 @@ public class MainController {
 	
 	@Autowired
 	private FitnessEventService fitnessEventService;
+	
+	@Autowired
+	private EquipmentService equipmentService;
 	
 	@GetMapping("/")
 	public String showIndex() {
@@ -117,5 +122,19 @@ public class MainController {
 		model.addAttribute("workouts", workouts);
 		
 		return "workouts";
+	}
+	
+	@GetMapping("/equipment")
+	public String showEquipment(Model model) {
+		
+		List<Equipment> equipments=equipmentService.getAll();
+		
+		if(equipments.size()==0) {
+			model.addAttribute("info", "Brak dodanego sprzętu.");
+		}
+		
+		model.addAttribute("equipments", equipments);
+		
+		return "equipments";
 	}
 }

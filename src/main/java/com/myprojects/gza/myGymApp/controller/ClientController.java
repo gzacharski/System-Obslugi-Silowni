@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myprojects.gza.myGymApp.entity.FitnessEvent;
-import com.myprojects.gza.myGymApp.entity.RemovalOfUserFromFitnessEventException;
 import com.myprojects.gza.myGymApp.entity.Role;
 import com.myprojects.gza.myGymApp.entity.User;
 import com.myprojects.gza.myGymApp.errors.ChronologicalSigingUpToFitnessEventException;
 import com.myprojects.gza.myGymApp.errors.MaxNumberOfPeopleInTheFitnessEventException;
 import com.myprojects.gza.myGymApp.errors.NoSuchAUserOnFitnessEventListException;
+import com.myprojects.gza.myGymApp.errors.RemovalOfUserFromFitnessEventException;
 import com.myprojects.gza.myGymApp.errors.SigningUpToFitnessEventException;
 import com.myprojects.gza.myGymApp.errors.TooEarlyException;
 import com.myprojects.gza.myGymApp.errors.TooLateException;
