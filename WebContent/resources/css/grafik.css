@@ -35,7 +35,7 @@ zajecia:hover
 	border-radius: 15px;
 }
 
-.zajecia_img:hover
+.zajecia_inner:hover
 {
 	cursor: pointer;
 }
@@ -69,12 +69,12 @@ zajecia:hover
 }
 
 
-.zajecia:hover .zajecia_img_info
+.zajecia_img:hover .zajecia_img_info
 {	
 	opacity: 0.8;
 }
 
-.zajecia:hover .zajecia_img img
+.zajecia_img:hover .zajecia_img img
 {	
 	-webkit-transform: scale(1.05);
 	-ms-transform: scale(1.05);
