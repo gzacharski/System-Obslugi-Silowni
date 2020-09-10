@@ -4,8 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.myprojects.gza.myGymApp.entity.FitnessEvent;
-import com.myprojects.gza.myGymApp.entity.RemovalOfUserFromFitnessEventException;
 import com.myprojects.gza.myGymApp.entity.User;
+import com.myprojects.gza.myGymApp.errors.RemovalOfUserFromFitnessEventException;
 import com.myprojects.gza.myGymApp.errors.SigningUpToFitnessEventException;
 
 public interface FitnessEventService {
