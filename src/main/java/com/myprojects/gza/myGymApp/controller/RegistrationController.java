@@ -1,5 +1,8 @@
 package com.myprojects.gza.myGymApp.controller;
 
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +16,25 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.myprojects.gza.myGymApp.captcha.ICaptchaService;
 import com.myprojects.gza.myGymApp.entity.User;
 import com.myprojects.gza.myGymApp.helperClasses.NewUser;
 import com.myprojects.gza.myGymApp.service.UserService;
+import com.myprojects.gza.myGymApp.util.GenericResponse;
 
 @Controller
 @RequestMapping("/register")
 public class RegistrationController {
+	
+	private static final Logger LOGGER=Logger.getLogger(RegistrationController.class.getCanonicalName());
+	
+	@Autowired
+	private ICaptchaService captchaService;
+	
+	@Autowired
+	private MainController mainController;
 	
 	@Autowired
 	private UserService userService;
@@ -36,19 +50,23 @@ public class RegistrationController {
 	public String showRegistrationForm(Model model) {
 		
 		model.addAttribute("newUser",new NewUser());
-		return "registration-form";
+		return addCaptchaToRegistrationForm(model);
 	}
 	
 	@PostMapping("/process")
 	public String processRegistrationForm(@Valid @ModelAttribute("newUser") NewUser newUser,
-			BindingResult bindingResult, Model model) {
+			BindingResult bindingResult, Model model, HttpServletRequest request) {
+		
+		String responseCaptcha=request.getParameter("g-recaptcha-response");
+		captchaService.processResponse(responseCaptcha);
 		
 		String userEmail=newUser.getEmail();
 		
 		//form validation
 		if(bindingResult.hasErrors()) {
-			return "registration-form";
+			return addCaptchaToRegistrationForm(model);
 		}
+		
 		
 		User existingUser=userService.findByEmail(userEmail);
 		
@@ -62,14 +80,23 @@ public class RegistrationController {
 			currentUser.setTelephoneNumber(newUser.getTelephoneNumber());
 			
 			model.addAttribute("newUser",currentUser);
-			model.addAttribute("registrationError","User email already exists");
+			model.addAttribute("registrationError","Użytkownik o podanym adresie email już istnieje.");
 			
-			return "registration-form";
+			return addCaptchaToRegistrationForm(model);
 		}
 		
 		userService.save(newUser);
 		
-		return "registration-confirmation";
+		model.addAttribute("register",true);
+		
+		return mainController.showLogIn(model);
 	}
-	
+
+	private String addCaptchaToRegistrationForm(Model model) {
+		
+		String site=captchaService.getReCaptchaSite();
+		model.addAttribute("siteKey", site);
+		
+		return "registration-form";
+	}
 }
