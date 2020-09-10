@@ -11,28 +11,28 @@ import com.myprojects.gza.myGymApp.validation.ValidTelephoneNumber;
 	@FieldMatch(firstField = "password", secondField = "matchingPasword", message = "The password fields must match.")
 })
 public class NewUser {
-	@NotNull(message ="Field is required.")
-	@Size(min = 3, max = 32, message = "Field is required. Type from 3 to 32 characters.")
+	@NotNull(message ="Imię użytkownika jest wymagane.")
+	@Size(min = 2, max = 32, message = "Imię użytkownika powinno zawierać od 2 do 32 znaków.")
 	private String name;
 	
-	@NotNull(message ="Field is required.")
-	@Size(min = 3, max = 32, message = "Field is required. Type from 3 to 32 characters.")
+	@NotNull(message ="Nazwisko użytkownika jest wymagane.")
+	@Size(min = 2, max = 32, message = "Nazwisko użytkownika powinno zawierać od 2 do 32 znaków.")
 	private String surname;
 	
-	@ValidTelephoneNumber(message = "Field is optional")
+	@ValidTelephoneNumber(message = "To pole jest opcjonalne. Numer telefonu powinien mieć 9 cyfr.")
 	private String telephoneNumber;
 	
-	@NotNull(message ="Field is required.")
-	@Size(min = 8, max = 32,  message = "Password must have from 8 to 32 characters.")
+	@NotNull(message ="Podanie hasła jest wymagane.")
+	@Size(min = 8, max = 32,  message = "Hasło musi zawierać od 8 do 32 znaków.")
 	private String password;
 	
-	@NotNull(message ="Field is required.")
-	@Size(min = 1, message = "Password must be the same.")
+	@NotNull(message ="Ponowne podanie hasła jest wymagane.")
+	@Size(min = 8, max = 32, message = "Podane hasła muszą być identyczne.")
 	private String matchingPassword;
 	
 	@ValidEmail
-	@NotNull(message ="Field is required.")
-	@Size(min = 1, message = "Type your email address.")
+	@NotNull(message ="Adres email jest wymagany.")
+	@Size(min = 3, message = "Wpisz swój adres email.")
 	private String email;
 	
 	public NewUser() {}
