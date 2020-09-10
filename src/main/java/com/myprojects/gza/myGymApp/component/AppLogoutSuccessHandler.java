@@ -47,7 +47,7 @@ public class AppLogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler imple
 		
 		logger.info(timeZone.toString());
 				
-		UserTimestamp userTimestamp=new UserTimestamp(UserAction.LogOut, LocalDateTime.now(zoneId), user.getId());
+		UserTimestamp userTimestamp=new UserTimestamp(UserAction.LogOut, LocalDateTime.now(zoneId), user);
 		  
 		userAnalyticsService.save(userTimestamp);
 	  
