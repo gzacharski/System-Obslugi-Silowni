@@ -18,7 +18,7 @@ import javax.validation.Payload;
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Documented
 public @interface ValidTelephoneNumber {
-	String message() default "Invalid telephone number";
+	String message() default "Numer telefonu powininien być 9 cyfrowy.";
 	
 	Class<?>[] groups() default {};
 	

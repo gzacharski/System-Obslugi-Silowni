@@ -17,7 +17,7 @@ import javax.validation.Payload;
 @Target({ TYPE, FIELD, ANNOTATION_TYPE })
 @Documented
 public @interface ValidEmail {
-	String message() default "Invalid email";
+	String message() default "Niepoprawny adres email.";
 	
 	Class<?>[] groups() default {};
 	
