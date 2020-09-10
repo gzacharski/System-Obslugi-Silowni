@@ -21,6 +21,8 @@ public class Place {
 	
 	@Column(name = "description")
 	private String description;
+	
+	public Place() {}
 
 	public Place(String placeName, String description) {
 		this.placeName = placeName;

@@ -1,13 +1,23 @@
 package com.myprojects.gza.myGymApp.entity;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name="fitness_events")
@@ -17,8 +27,9 @@ public class FitnessEvent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-	
+
 	@Column(name="start_time")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime startTime;
 	
 	@Column(name="max_people")
@@ -27,33 +38,42 @@ public class FitnessEvent {
 	@Column(name="description")
 	private String description;
 	
-	@Column(name="trainer_id")
-	private int trainerId;
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+			CascadeType.PERSIST,CascadeType.REFRESH}, 
+			fetch = FetchType.EAGER)
+	@JoinColumn(name="trainer_id")
+	private Trainer trainer;
 	
-	@Column(name="workout_id")
-	private int workoutId;
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+			CascadeType.PERSIST,CascadeType.REFRESH}, 
+			fetch = FetchType.EAGER)
+	@JoinColumn(name="workout_id")
+	private Workout workout;
 	
-	@Column(name="place_id")
-	private int placeId;
+	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+			CascadeType.PERSIST,CascadeType.REFRESH}, 
+			fetch = FetchType.EAGER)
+	@JoinColumn(name="place_id")
+	private Place place;
 	
-	public FitnessEvent(int id, LocalDateTime startTime, int maxPeople, String description, int trainerId, int workoutId,
-			int placeId) {
+	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,
+			CascadeType.PERSIST,CascadeType.REFRESH},
+			fetch = FetchType.LAZY)
+	@JoinTable(name= "attendance_list", joinColumns = @JoinColumn(name = "fitness_event_id"), 
+			inverseJoinColumns = @JoinColumn(name="user_id"))
+	private Collection<User> users;
+	
+	public FitnessEvent() {}
+
+	public FitnessEvent(int id, LocalDateTime startTime, int maxPeople, String description, Trainer trainer,
+			Workout workout, Place place) {
 		this.id = id;
 		this.startTime = startTime;
 		this.maxPeople = maxPeople;
 		this.description = description;
-		this.trainerId = trainerId;
-		this.workoutId = workoutId;
-		this.placeId = placeId;
-	}
-	
-	public FitnessEvent(LocalDateTime startTime, int maxPeople, String description, int trainerId, int workoutId, int placeId) {
-		this.startTime = startTime;
-		this.maxPeople = maxPeople;
-		this.description = description;
-		this.trainerId = trainerId;
-		this.workoutId = workoutId;
-		this.placeId = placeId;
+		this.trainer = trainer;
+		this.workout = workout;
+		this.place = place;
 	}
 
 	public int getId() {
@@ -67,7 +87,7 @@ public class FitnessEvent {
 	public LocalDateTime getStartTime() {
 		return startTime;
 	}
-
+	
 	public void setStartTime(LocalDateTime startTime) {
 		this.startTime = startTime;
 	}
@@ -88,33 +108,41 @@ public class FitnessEvent {
 		this.description = description;
 	}
 
-	public int getTrainerId() {
-		return trainerId;
+	public Trainer getTrainer() {
+		return trainer;
 	}
 
-	public void setTrainerId(int trainerId) {
-		this.trainerId = trainerId;
+	public void setTrainer(Trainer trainer) {
+		this.trainer = trainer;
 	}
 
-	public int getWorkoutId() {
-		return workoutId;
+	public Workout getWorkout() {
+		return workout;
 	}
 
-	public void setWorkoutId(int workoutId) {
-		this.workoutId = workoutId;
+	public void setWorkout(Workout workout) {
+		this.workout = workout;
 	}
 
-	public int getPlaceId() {
-		return placeId;
+	public Place getPlace() {
+		return place;
 	}
 
-	public void setPlaceId(int placeId) {
-		this.placeId = placeId;
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
+	public Collection<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Collection<User> users) {
+		this.users = users;
 	}
 
 	@Override
 	public String toString() {
-		return "FitnessEvent [startTime=" + startTime.toString() + ", maxPeople=" + maxPeople + ", description=" + description
-				+ ", trainerId=" + trainerId + ", workoutId=" + workoutId + ", placeId=" + placeId + "]";
+		return "FitnessEvent [id=" + id + ", startTime=" + startTime + ", maxPeople=" + maxPeople + ", description="
+				+ description + ", trainer=" + trainer + ", workout=" + workout + ", place=" + place + "]";
 	}
 }

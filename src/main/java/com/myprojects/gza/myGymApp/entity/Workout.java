@@ -86,6 +86,7 @@ public class Workout {
 	public void setDuration(Time duration) {
 		this.duration = duration;
 	}
+
 	
 	@Override
 	public String toString() {

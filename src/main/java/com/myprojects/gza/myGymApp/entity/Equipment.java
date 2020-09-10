@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="gym_equipments")
@@ -13,9 +14,10 @@ public class Equipment {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="equipment_id")
+	@Column(name="id")
 	private int id;
 	
+	@NotNull
 	@Column(name="quantity")
 	private int quantity;
 	
@@ -24,6 +26,10 @@ public class Equipment {
 	
 	@Column(name="photo")
 	private String photo;
+	
+	@NotNull
+	@Column(name="name")
+	private String name;
 	
 	public Equipment() {}
 

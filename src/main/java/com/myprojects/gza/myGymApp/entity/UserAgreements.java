@@ -1,10 +1,13 @@
 package com.myprojects.gza.myGymApp.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +33,12 @@ public class UserAgreements {
 	
 	@Column(name="zgoda5")
 	private boolean agreement5;
+	
+	@OneToOne(mappedBy = "userAgreements",
+			cascade = {CascadeType.DETACH, CascadeType.MERGE, 
+					CascadeType.PERSIST, CascadeType.REFRESH}, 
+			fetch = FetchType.LAZY)
+	private User user;
 
 	public UserAgreements() {}
 	
@@ -85,6 +94,18 @@ public class UserAgreements {
 
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

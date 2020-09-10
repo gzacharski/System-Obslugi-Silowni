@@ -2,13 +2,17 @@ package com.myprojects.gza.myGymApp.entity;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.myprojects.gza.myGymApp.helperClasses.UserAction;
@@ -29,15 +33,18 @@ public class UserTimestamp {
 	@Column(name="timestamp")
 	private LocalDateTime timestamp;
 	
-	@Column(name="user_id")
-	private int userId;
+	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, 
+			CascadeType.PERSIST, CascadeType.REFRESH}, 
+	fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+	private User user;
 	
 	public UserTimestamp() {}
 
-	public UserTimestamp(UserAction userAction, LocalDateTime timestamp, int userId) {
+	public UserTimestamp(UserAction userAction, LocalDateTime timestamp, User user) {
 		this.userAction = userAction;
 		this.timestamp = timestamp;
-		this.userId = userId;
+		this.user = user;
 	}
 
 	public long getId() {
@@ -64,17 +71,16 @@ public class UserTimestamp {
 		this.timestamp = timestamp;
 	}
 
-	public int getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
 	public String toString() {
-		return "UserLoginLogoutTimeStamp [id=" + id + ", userAction=" + userAction + ", timestamp=" + timestamp
-				+ ", userId=" + userId + "]";
+		return "UserTimestamp [id=" + id + ", userAction=" + userAction + ", timestamp=" + timestamp + "]";
 	}
 }

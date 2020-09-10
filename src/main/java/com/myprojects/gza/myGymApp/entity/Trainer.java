@@ -1,5 +1,7 @@
 package com.myprojects.gza.myGymApp.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,9 +29,16 @@ public class Trainer {
 	@Column(name="image")
 	private String image;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, 
+					CascadeType.PERSIST, CascadeType.REFRESH}, 
+			fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private User user;
+	
+	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, 
+					CascadeType.PERSIST, CascadeType.REFRESH}, 
+			fetch = FetchType.LAZY, mappedBy = "trainer")
+	private List<FitnessEvent> fitnessEvents;
 	
 	public Trainer() {}
 
