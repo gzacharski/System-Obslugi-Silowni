@@ -1,6 +1,4 @@
-<%@	page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
@@ -8,105 +6,80 @@
 <!DOCTYPE html>
 <html lang="pl">
 	<head>
-		<title>Strefa Klienta</title>
+		<title>Strefa Trenera</title>
 		<jsp:include page="/WEB-INF/view/components/metadata.jsp"/>
 		<jsp:include page="/WEB-INF/view/components/stylesheets.jsp"/>
-
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/strefa-klienta-zalogowany-user.css" type="text/css" />
-		<script defer="defer" src="${pageContext.request.contextPath}/resources/js/currentDate.js"></script>
 	</head>
 
-	<body onload="setCurrentDate();">
+	<body>
 		<jsp:include page="/WEB-INF/view/components/header.jsp"/>
+		
 		<main>
 			<div class="container">
-				<article>
-					<section>
+				<div class="row">
+				
+					<div class="col-12 mt-3">
+						<figure class="headerTile">
+							<jsp:include page="/WEB-INF/view/components/bootstrap-icons/person-circle.jsp"/>
+							<span>Witaj Trenerze: <security:authentication property="principal.username"/></span>
+							<br>
+							<span>Jaki plan treningowy na dziś?</span>
+						</figure>
+					</div>
+				</div>
 
-						<div class="row">
+				<div class="row">
+					
+					<div class="col-12 col-md-6 col-lg-4">
+						<figure class="buttonWrapper">
+							<form:form action="${pageContext.request.contextPath}/user/trainer/function" method="get"> 
+								<input type="submit" value="Funkcja 1" class="tileButton">
+							</form:form>
+						</figure>
+					</div>
+					
+					<div class="col-12 col-md-6 col-lg-4">
+						<figure class="buttonWrapper">
+							<form:form action="${pageContext.request.contextPath}/user/trainer/function" method="get"> 
+								<input type="submit" value="Funkcja 2" class="tileButton">
+							</form:form>
+						</figure>
+					</div>
+					
+					<div class="col-12 col-md-6 col-lg-4">
+						<figure class="buttonWrapper">
+							<form:form action="${pageContext.request.contextPath}/user/trainer/function" method="get"> 
+								<input type="submit" value="Funkcja 3" class="tileButton">
+							</form:form>
+						</figure>
+					</div>
 
-							<div class="col-9">
-								<figure class="headerTile">
-									Witaj Trenerze: <security:authentication property="principal.username"/>
-									Jaki plan treningowy na dziś?
-									<!--  itaj ${client.name} ${sessionScope.client.surname} <br/>
-									Jaki plan treningowy na dziś? -->
-								</figure>
-							</div>
+					<div class="col-12 col-md-6 col-lg-4">
+						<figure class="buttonWrapper">
+							<form:form action="${pageContext.request.contextPath}/user/trainer/function" method="get"> 
+								<input type="submit" value="Funkcja 4" class="tileButton">
+							</form:form>
+						</figure>
+					</div>
+					
+					<div class="col-12 col-md-6 col-lg-4">
+						<figure class="buttonWrapper">
+							<form:form action="${pageContext.request.contextPath}/user/trainer/function" method="get"> 
+								<input type="submit" value="Funkcja 5" class="tileButton">
+							</form:form>
+						</figure>
+					</div>
+					
+					<div class="col-12 col-md-6 col-lg-4">
+						<figure class="buttonWrapper">
+							<form:form action="${pageContext.request.contextPath}/user/trainer/function" method="get"> 
+								<input type="submit" value="Funkcja 6" class="tileButton">
+							</form:form>
+						</figure>
+					</div>
 
-							<div class="col-3">
-								<figure class="buttonWrapper">
-								
-									<form:form action="${pageContext.request.contextPath}/logout" method="POST">
-										<input type="submit" value="Wyloguj się" class="headerButton"/>
-									</form:form>
-								
-								</figure>
-							</div>
-
-						</div>
-						
-						<div class="row">
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form action="SignUp" method="post"> 
-										<input type="hidden" name="clientId" value="${sessionScope.client.id}"/>
-										<input type="hidden" name="command" value="SHOW_PROFILE"/>
-										<input type="submit" value="Zarządzaj kontem" class="tileButton"/>
-									</form>
-								</figure>
-							</div>
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form action="FitnessEvents" method="post"> 
-										<input type="hidden" name="clientId" value="${sessionScope.client.id}"/>
-										<input type="hidden" name="command" value="SHOW_CLIENT_EVENTS"/>
-										<input type="hidden" id="selectedDateTime" name="selectedDateTime"/>
-										<input type="submit" value="Zarządzaj rezerwacjami zajęć" class="tileButton"/>
-									</form>
-								</figure>
-							</div>
-							
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form action="" method="post"> 
-										<input type="hidden" name="clientId" value="${sessionScope.client.id}"/>
-										<input type="hidden" name="command" value="SHOW_EQUIPMENT"/>
-										<input type="submit" value="Zarządzaj rezerwacjami sprzętu" class="tileButton"/>
-									</form>
-								</figure>
-							</div>
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form action="" method="post"> 
-										<input type="submit" value="Funkcja1" class="tileButton"/>
-									</form>
-								</figure>
-							</div>
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form action="" method="post"> 
-										<input type="submit" value="Funkcja2" class="tileButton"/>
-									</form>
-								</figure>
-							</div>
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form action="" method="post"> 
-										<input type="submit" value="Funkcja3" class="tileButton"/>
-									</form>
-								</figure>
-							</div>
-
-						</div>
-
-					</section>
-				</article>
+				</div>
 			</div>
 		</main>
 		

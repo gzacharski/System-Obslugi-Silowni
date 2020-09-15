@@ -46,7 +46,7 @@
 				<div class="input-group-prepend">
 					<span class="input-group-text">@</span>
 				</div>
-				<form:input path="email" id="email" class="form-control" placeholder="Email"/>
+				<form:input path="email" id="email" class="form-control" placeholder="Email" readonly="true"/>
 			</div>
 			<div class="mt-2 font-weight-lighter text-warning" style="font-size: smaller;">
 				<form:errors path="email"/>

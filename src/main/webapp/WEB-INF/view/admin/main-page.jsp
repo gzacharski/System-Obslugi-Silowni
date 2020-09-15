@@ -96,7 +96,7 @@
 							
 							<div class="col-12 col-md-6 col-lg-4">
 								<figure class="buttonWrapper">
-									<form:form action="${pageContext.request.contextPath}/user/admin/statistics" method="get"> 
+									<form:form action="${pageContext.request.contextPath}/user/admin/function" method="get"> 
 										<input type="submit" value="Statystyki" class="tileButton">
 									</form:form>
 								</figure>
