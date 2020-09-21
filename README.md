@@ -7,18 +7,18 @@ System obsługi siłowni jest aplikacja stworzona w celu ulepszenia zarządzania
 ***
 #### Technologie
 Front-end: 
-*HTML
-*CSS
-*JavaScript
-*framework Bootstrap
-*Java Server Pages.
+* HTML
+* CSS
+* JavaScript
+* framework Bootstrap
+* Java Server Pages.
 Back-end: 
-*Java/framework Spring,  w szczególności 
-..*Spring MVC
-..*Spring Security 
-..*Spring AOP
-..*Spring REST.
+* Java/framework Spring,  w szczególności 
+..* Spring MVC
+..* Spring Security 
+..* Spring AOP
+..* Spring REST.
 Baza danych: 
 *MySQL 
-*dostęp za pomocą frameworka Hibernate. 
+* dostęp za pomocą frameworka Hibernate. 
 Dodano integracje z Google reCAPTCHA.
