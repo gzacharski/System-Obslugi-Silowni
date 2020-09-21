@@ -47,6 +47,11 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping("/access-denied")
+	public String showAccessDenied() {
+		return "access-denied";
+	}
+	
 	@GetMapping("/fitnessEvents")
 	public String showFitnessEvents(Model model) {
 		

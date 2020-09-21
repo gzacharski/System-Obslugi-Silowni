@@ -99,4 +99,9 @@ public class RegistrationController {
 		
 		return "registration-form";
 	}
+	
+	@GetMapping("/function")
+	public String showErrorPage() {
+		return "errors/error-404";
+	}
 }

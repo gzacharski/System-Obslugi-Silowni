@@ -1,9 +1,12 @@
 package com.myprojects.gza.myGymApp.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -13,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myprojects.gza.myGymApp.entity.BoookingEquipment;
+import com.myprojects.gza.myGymApp.entity.Equipment;
 import com.myprojects.gza.myGymApp.entity.FitnessEvent;
 import com.myprojects.gza.myGymApp.entity.Role;
 import com.myprojects.gza.myGymApp.entity.User;
@@ -33,6 +39,8 @@ import com.myprojects.gza.myGymApp.errors.TooLateException;
 import com.myprojects.gza.myGymApp.errors.UserAlreadyParticipatesInTheFitnessEventException;
 import com.myprojects.gza.myGymApp.errors.UserCanNotCancelParticipationFromPastFitnessEventsException;
 import com.myprojects.gza.myGymApp.errors.UserIsNotAllowedToCancelPartcipationOneHourBeforeTheEventStarts;
+import com.myprojects.gza.myGymApp.service.BookingEquipmentService;
+import com.myprojects.gza.myGymApp.service.EquipmentService;
 import com.myprojects.gza.myGymApp.service.FitnessEventService;
 import com.myprojects.gza.myGymApp.service.UserService;
 
@@ -46,9 +54,20 @@ public class ClientController {
 	@Autowired
 	private FitnessEventService fitnessEventService;
 	
+	@Autowired
+	private EquipmentService equipmentService;
+	
+	@Autowired
+	private BookingEquipmentService bookingEquipmentService;
+
 	@GetMapping("/main")
 	public String showMainPage() {
 		return "client/main-page";
+	}
+	
+	@GetMapping("/function")
+	public String showErrorPage() {
+		return "errors/error-404";
 	}
 	
 	@GetMapping("/editUser")
@@ -62,7 +81,9 @@ public class ClientController {
 	}
 
 	@PostMapping("/editUser")
-	public String saveFormToEditUserData(@Valid @ModelAttribute("user") User user, Model model) {
+	public String saveFormToEditUserData(@Valid @ModelAttribute("user") User user, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasErrors()) return "client/manage-account";
 		
 		Collection<Role> roles=userService.getById(user.getId()).getRoles();
 		
@@ -72,7 +93,6 @@ public class ClientController {
 			model.addAttribute("success", "Twoje dane zostały zaktualizowane.");
 		}else {
 			model.addAttribute("danger", "Wystąpił problem z aktualizacją danych.");
-			
 		}
 		
 		return "client/manage-account";
@@ -156,7 +176,7 @@ public class ClientController {
 				if(exception.getCause() instanceof TooEarlyException) {
 					model.addAttribute("warning", "Zapisy na wskazane zajęcia rozpoczynają się na 7 dni przed datą wydarzenia zajęć.");
 				}else if(exception.getCause() instanceof TooLateException) {
-					model.addAttribute("warning", "Nie można się zapisać na zajęcia, które już się odbyły.");
+					model.addAttribute("warning", "Nie można się zapisać na zajęcia które się już odbyły.");
 				}else {
 					model.addAttribute("danger", "Ups! Wystąpił błąd podczas zapisu na zajęcia. Spróbuj jeszcze raz.");
 				}
@@ -192,6 +212,56 @@ public class ClientController {
 		}
 			
 		return new ModelAndView("forward:/fitnessEvents", model);
+	}
+	
+	@GetMapping("/equipment/book")
+	public String showFormToBookEquipment(Model model){
+		
+		Map<Integer, String> equipments=equipmentService.getAll()
+				.stream().collect(Collectors.toMap(Equipment::getId, Equipment::getName));
+		
+		model.addAttribute("equipments", equipments);
+		
+		LocalDateTime localDateTime=LocalDateTime.now();
+		
+		BoookingEquipment boookingEquipment=new BoookingEquipment(localDateTime,localDateTime.plusMinutes(30));
+		
+		model.addAttribute("equipments", equipments);
+		model.addAttribute("bookingOfEquipment",boookingEquipment);
+		
+		return "book-equipment";
+	}
+	
+	
+	@PostMapping("/equipment/book")
+	public String saveFormToBookEquipment(@ModelAttribute("bookingOfEquipment") BoookingEquipment boookingEquipment, 
+			Model model, Authentication authentication) {
+		
+		User theUser = getUser(authentication);
+		
+		return "client/book-equipment";
+	}
+	
+	@GetMapping("/equipment/booking/edit")
+	public String showFormToEditBookingOfEquipment(@RequestParam("bookingOfEquipmentId") int id, 
+			Model model, Authentication authentication){
+		
+		
+		return "book-equipment";
+	}
+	
+	@PostMapping("/equipment/booking/edit")
+	public String saveFormToEditBookingOfEquipment(@ModelAttribute("equipment") Equipment equipment, 
+			Model model, Authentication authentication) {
+		
+		return "book-equipment";
+	}
+	
+	@GetMapping("/equipment/booking/cancel")
+	public String cancelBookingOfEquipment(@RequestParam("bookingOfEquipmentId") int id, Model model, Authentication authentication){
+		
+		
+		return "book-equipment";
 	}
 	
 	private User getUser(Authentication authentication) {

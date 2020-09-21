@@ -10,6 +10,11 @@ public class EmployeeController {
 	
 	@GetMapping("/main")
 	public String showMainPage() {
-		return "employee-main-page";
+		return "employee/main-page";
+	}
+	
+	@GetMapping("/function")
+	public String showErrorPage() {
+		return "errors/error-404";
 	}
 }

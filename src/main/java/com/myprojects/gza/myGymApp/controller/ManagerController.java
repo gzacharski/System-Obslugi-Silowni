@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/user/trainer")
-public class TrainerController {
+@RequestMapping("/user/manager")
+public class ManagerController {
 	
 	@GetMapping("/main")
 	public String showMainPage() {
-		return "trainer/main-page";
+		return "manager/main-page";
 	}
 	
 	@GetMapping("/function")

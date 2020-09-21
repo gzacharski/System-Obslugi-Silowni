@@ -10,6 +10,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,38 +51,14 @@ public class AdminController {
 	@Autowired
 	private FitnessEventService fitnessEventService;
 	
-	@Autowired
-	private EquipmentService equipmentService;
-	
 	@GetMapping("/main")
 	public String showMainPage() {
 		return "admin/main-page";
 	}
 	
-	@GetMapping("/users")
-	public String showUsers(Model model) {
-		
-		List<User> users=userService.getAllUsers();
-		
-		model.addAttribute("users", users);
-		
-		return "admin/user-list";
-	}
-	
-	@GetMapping("/users/search")
-	public String searchUser(@RequestParam("searchedPhrase") String searchedPhrase, Model model) {
-		
-		List<User> users=userService.search(searchedPhrase);
-		
-		model.addAttribute("users", users);
-		
-		if(users.size()==0) {
-			model.addAttribute("warning", "Nie znaleziono podanej frazy :(");
-		}else {
-			model.addAttribute("info", "Znaleziono " +users.size() + " pasujących rezultatów");
-		}
-		
-		return "admin/user-list";
+	@GetMapping("/function")
+	public String showErrorPage() {
+		return "errors/error-404";
 	}
 	
 	@GetMapping("/editUser")
@@ -91,19 +69,23 @@ public class AdminController {
 		theUser.mapRoleCollectionToArray();
 		
 		model.addAttribute("user", theUser);
-		
+
 		return "admin/user-edit";
 	}
 	
 	@PostMapping("/editUser")
-	public String saveFormToEditUser(@ModelAttribute("user") User theUser, Model theModel) {
+	public String saveFormToEditUser(@Valid @ModelAttribute("user") User theUser, BindingResult bindingResult, Model model) {
 		
-		theUser.mapArrayToRoleCollection();
+		if(bindingResult.hasErrors()) {
+			addErrorsToModel(bindingResult, model);
+		}else {
+			theUser.mapArrayToRoleCollection();
+		
+			userService.update(theUser);
+			
+			model.addAttribute("success", "Dane zostały zaktualizowane.");
+		}
 	
-		userService.update(theUser);
-		
-		theModel.addAttribute("hasBeenSaved", true);
-		
 		return "admin/user-edit";
 	}
 	
@@ -120,7 +102,10 @@ public class AdminController {
 		
 		model.addAttribute("info", userHasbeenRemoved);
 		
-		return showUsers(model);
+		List<User> users=userService.getAllUsers();
+		model.addAttribute("users", users);
+		
+		return "users/list"; 
 	}
 	
 	@GetMapping("/trainers")
@@ -147,8 +132,10 @@ public class AdminController {
 	}
 	
 	@PostMapping("/trainers/add")
-	public String saveFormToAddTrainer(@ModelAttribute("newTrainer") Trainer trainer, Model model) {
+	public String saveFormToAddTrainer(@Valid @ModelAttribute("newTrainer") Trainer trainer, BindingResult bindingResult, Model model) {
 		
+		if(bindingResult.hasErrors()) addErrorsToModel(bindingResult, model);
+
 		System.out.println(trainer.toString());
 		
 		if(trainerService.addNewTrainer(trainer)) {
@@ -159,7 +146,7 @@ public class AdminController {
 
 		return showTrainers(model);
 	}
-	
+
 	@GetMapping("/trainers/delete")
 	public String deleteTrainer(@RequestParam("trainerId") int trainerId, Model model) {
 		
@@ -185,7 +172,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("/trainers/edit")
-	public String saveFormToEditTrainer(@ModelAttribute("trainer") Trainer trainer, Model model) {
+	public String saveFormToEditTrainer(@Valid @ModelAttribute("trainer") Trainer trainer, BindingResult bindingResult, Model model) {
 		
 		System.out.println(trainer.toString());
 		
@@ -213,289 +200,98 @@ public class AdminController {
 		
 		return "admin/trainer-list";
 	}
-	
-	@GetMapping("/workouts")
-	public String showWorkouts(Model model) {
-		
-		List<Workout> workouts=workoutService.getWorkouts();
-		
-		model.addAttribute("workouts", workouts);
-		
-		return "admin/workout-list";
-	}
-	
-	@GetMapping("/workouts/add")
-	public String showFormToAddWorkout(Model model) {
-		
-		model.addAttribute("workout", new Workout());
-		
-		return "admin/workout-add";
-	}
-	
-	@PostMapping("/workouts/add")
-	public String saveFormToAddWorkout(@ModelAttribute("workout") Workout workout, Model model) {
-		
-		if(workoutService.addWorkout(workout)) {
-			model.addAttribute("info", "Pomyślnie dodano nowy typ zajęć.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z dodaniem nowych zajęć do bazy.");
-		}
-		
-		return showWorkouts(model);
-	}
-	
-	@GetMapping("/workouts/edit")
-	public String showFormToEditWorkout(@RequestParam("workoutId") int workoutId, Model model) {
-		
-		Workout tempWorkout=workoutService.getWorkoutById(workoutId);
-		
-		model.addAttribute("workout", tempWorkout);
-		
-		return "admin/workout-edit";
-	}
-	
-	@PostMapping("/workouts/edit")
-	public String saveFormToEditWorkout(@ModelAttribute("workout") Workout workout, Model model) {
-		
-		if(workoutService.updateWorkout(workout)) {
-			model.addAttribute("info", "Pomyślnie zaktualizowano typ zajęć.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z aktualizacją zajęć.");
-		}
-		
-		return "admin/workout-edit";
-	}
-	
-	@GetMapping("/workouts/delete")
-	public String deleteWorkout(@RequestParam("workoutId") int workoutId, Model model) {
-		
-		try {
-			workoutService.deleteWorkout(workoutId);
-			model.addAttribute("info", "Typ zajęć został usunięty");
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("warning", "Wystąpił problem z usunięciem danego typu danych.");
-		}
-	
-		return showWorkouts(model);
-	}
-	
-	@GetMapping("/trainingRooms")
-	public String showTrainingRooms(Model model) {
-		
-		List<Place> places=placeService.getPlaces();
-		
-		model.addAttribute("places", places);
-		
-		return "admin/training-room-list";
-	}
-	
-	@GetMapping("/trainingRooms/add")
-	public String showFormToAddTrainingRoom(Model model) {
-		
-		model.addAttribute("place", new Place());
-		
-		return "admin/training-room-add";
-	}
-	
-	@PostMapping("/trainingRooms/add")
-	public String saveFormToAddTrainingRoom(@ModelAttribute("place") Place place, Model model) {
-		
-		if(placeService.addPlace(place)) {
-			model.addAttribute("info", "Pomyślnie dodano nową salę treningową.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z dodaniem nowej sali treningowej do bazy.");
-		}
-		
-		return showTrainingRooms(model);
-	}
-	
-	@GetMapping("/trainingRooms/edit")
-	public String showFormToEditTrainingRoom(@RequestParam("trainingRoomId") int trainingRoomId, Model model) {
-		
-		Place tempPlace=placeService.getById(trainingRoomId);
-		
-		model.addAttribute("place", tempPlace);
-		
-		return "admin/training-room-add";
-	}
-	
-	@PostMapping("/trainingRooms/edit")
-	public String saveFormToEditTrainingRoom(@ModelAttribute("place") Place place, Model model) {
-		
-		if(placeService.editPlace(place)) {
-			model.addAttribute("info", "Pomyślnie zaktualizowano salę treningową.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z aktualizacją sali treningowej.");
-		}
-		
-		return "admin/training-room-add";
-	}
-	
-	@GetMapping("/trainingRooms/delete")
-	public String deleteTrainingRoom(@RequestParam("trainingRoomId") int trainingRoomId, Model model) {
-		
-		if(placeService.deletePlace(trainingRoomId)) {
-			model.addAttribute("info", "Sala treningowa została usunięta");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z usunięciem sali treningowej.");
-		}
-		
-		return showTrainingRooms(model);
-	}
-	
-	@GetMapping("/events")
-	public String showFitnessEvents(Model model) {
-		
-		List<FitnessEvent> fitnessEvents=fitnessEventService.getAll();
-		
-		model.addAttribute("events", fitnessEvents);
-		model.addAttribute("localDateTimeFormat", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
-		
-		return "admin/fitness-event-list";
-	}
-	
-	@GetMapping("/events/add")
-	public String showFormToAddFitnessEvent(Model model) {
-		
-		Map<Integer, String> workouts=workoutService.getAllTypesOfWorkoutMappedById();
-		Map<Integer, String> trainers=trainerService.getAllTrainersMappedById();
-		Map<Integer, String> places=placeService.getAllPlacesMappedById();
-		
-		model.addAttribute("workouts", workouts);
-		model.addAttribute("trainers", trainers);
-		model.addAttribute("places", places);
-		model.addAttribute("fitnessEvent", new FitnessEvent());
 
-		return "admin/fitness-event-add";
-	}
-	
-	@PostMapping("/events/add")
-	public String saveFormToAddFitnessEvent(@ModelAttribute("fitnessEvent") FitnessEvent fitnessEvent, Model model) {
-		
-		if(fitnessEventService.save(fitnessEvent)) {
-			model.addAttribute("info", "Pomyślnie dodano nowe zajęcia.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z dodaniem nowych zajęć.");
-		}
-		
-		return showFitnessEvents(model);
-	}
-	
-	@GetMapping("/events/edit")
-	public String showFormToEditFitnessEvent(@RequestParam("eventId") int id, Model model) {
-		
-		Map<Integer, String> workouts=workoutService.getAllTypesOfWorkoutMappedById();
-		Map<Integer, String> trainers=trainerService.getAllTrainersMappedById();
-		Map<Integer, String> places=placeService.getAllPlacesMappedById();
-		FitnessEvent tempFitnessEvent=fitnessEventService.getById(id);
-		
-		model.addAttribute("workouts", workouts);
-		model.addAttribute("trainers", trainers);
-		model.addAttribute("places", places);
-		model.addAttribute("fitnessEvent", tempFitnessEvent);
-		
-		return "admin/fitness-event-edit";
-	}
-	
-	@PostMapping("/events/edit")
-	public String saveFormToEditFitnessEvent(@ModelAttribute("fitnessEvent") FitnessEvent fitnessEvent, Model model) {
-		
-		if(fitnessEventService.update(fitnessEvent)) {
-			model.addAttribute("info", "Pomyślnie zaktualizowano zajęcia.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z aktualizacją zajęć.");
-		}
-		
-		model.addAttribute("fitnessEvent",fitnessEvent);
-		
-		return "admin/fitness-event-edit";
-	}
-	
-	@GetMapping("/events/delete")
-	public String deleteFitnessEvent(@RequestParam("eventId") int id, Model model) {
-		
-		if(fitnessEventService.delete(id)) {
-			model.addAttribute("info", "Zajęcia zostały usunięte.");
-		}else {
-			model.addAttribute("warning", "Wystąpił problem z usunięciem zajęć.");
-		}
-		
-		return showFitnessEvents(model);
-	}
-	
-	@GetMapping("/equipment")
-	public String showEquipment(Model model) {
-		
-		List<Equipment> equipments=equipmentService.getAll();
-		
-		if(equipments.size()==0) {
-			model.addAttribute("info", "Brak dodanego sprzętu.");
-		}
-		
-		model.addAttribute("equipments", equipments);
-		
-		return "admin/equipment-list";
-	}
-	
-	@GetMapping("/equipment/add")
-	public String showFormToAddEquipment(Model model) {
-		
-		model.addAttribute("equipment", new Equipment());
-		
-		return "admin/equipment-add";
-	}
-	
-	@PostMapping("/equipment/add")
-	public String saveFormToAddEquipment(@Valid @ModelAttribute("equipment") Equipment equipment, Model model) {
-		
-		try {
-			equipmentService.save(equipment);
-			model.addAttribute("info", "Pomyślnie dodano nowy sprzęt.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("warning", "Wystąpił problem z dodaniem nowego sprzętu.");
-		}
 
-		return showEquipment(model);
-	}
+//	@GetMapping("/events")
+//	public String showFitnessEvents(Model model) {
+//		
+//		List<FitnessEvent> fitnessEvents=fitnessEventService.getAll();
+//		
+//		model.addAttribute("events", fitnessEvents);
+//		model.addAttribute("localDateTimeFormat", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+//		
+//		return "admin/fitness-event-list";
+//	}
+//	
+//	@GetMapping("/events/add")
+//	public String showFormToAddFitnessEvent(Model model) {
+//		
+//		Map<Integer, String> workouts=workoutService.getAllTypesOfWorkoutMappedById();
+//		Map<Integer, String> trainers=trainerService.getAllTrainersMappedById();
+//		Map<Integer, String> places=placeService.getAllPlacesMappedById();
+//		
+//		model.addAttribute("workouts", workouts);
+//		model.addAttribute("trainers", trainers);
+//		model.addAttribute("places", places);
+//		model.addAttribute("fitnessEvent", new FitnessEvent());
+//
+//		return "admin/fitness-event-add";
+//	}
+//	
+//	@PostMapping("/events/add")
+//	public String saveFormToAddFitnessEvent(@Valid @ModelAttribute("fitnessEvent") FitnessEvent fitnessEvent, BindingResult bindingResult, Model model) {
+//		
+//		if(bindingResult.hasErrors()) addErrorsToModel(bindingResult, model);
+//		
+//		if(fitnessEventService.save(fitnessEvent)) {
+//			model.addAttribute("info", "Pomyślnie dodano nowe zajęcia.");
+//		}else {
+//			model.addAttribute("warning", "Wystąpił problem z dodaniem nowych zajęć.");
+//		}
+//		
+//		return showFitnessEvents(model);
+//	}
+//	
+//	@GetMapping("/events/edit")
+//	public String showFormToEditFitnessEvent(@RequestParam("eventId") int id, Model model) {
+//		
+//		Map<Integer, String> workouts=workoutService.getAllTypesOfWorkoutMappedById();
+//		Map<Integer, String> trainers=trainerService.getAllTrainersMappedById();
+//		Map<Integer, String> places=placeService.getAllPlacesMappedById();
+//		FitnessEvent tempFitnessEvent=fitnessEventService.getById(id);
+//		
+//		model.addAttribute("workouts", workouts);
+//		model.addAttribute("trainers", trainers);
+//		model.addAttribute("places", places);
+//		model.addAttribute("fitnessEvent", tempFitnessEvent);
+//		
+//		return "admin/fitness-event-edit";
+//	}
+//	
+//	@PostMapping("/events/edit")
+//	public String saveFormToEditFitnessEvent(@Valid @ModelAttribute("fitnessEvent") FitnessEvent fitnessEvent,BindingResult bindingResult, Model model) {
+//		
+//		if(bindingResult.hasErrors()) addErrorsToModel(bindingResult, model);
+//		
+//		if(fitnessEventService.update(fitnessEvent)) {
+//			model.addAttribute("info", "Pomyślnie zaktualizowano zajęcia.");
+//		}else {
+//			model.addAttribute("warning", "Wystąpił problem z aktualizacją zajęć.");
+//		}
+//		
+//		model.addAttribute("fitnessEvent",fitnessEvent);
+//		
+//		return "admin/fitness-event-edit";
+//	}
+//	
+//	@GetMapping("/events/delete")
+//	public String deleteFitnessEvent(@RequestParam("eventId") int id, Model model) {
+//		
+//		if(fitnessEventService.delete(id)) {
+//			model.addAttribute("info", "Zajęcia zostały usunięte.");
+//		}else {
+//			model.addAttribute("warning", "Wystąpił problem z usunięciem zajęć.");
+//		}
+//		
+//		return showFitnessEvents(model);
+//	}
 	
-	@GetMapping("/equipment/edit")
-	public String showFormToEditEquipment(@RequestParam("equipmentId") int id, Model model) {
+	private void addErrorsToModel(BindingResult bindingResult, Model model) {
 		
-		Equipment equipment=equipmentService.getById(id);
+		List<FieldError> fieldErrors=bindingResult.getFieldErrors();
 		
-		model.addAttribute("equipment", equipment);
+		List<String> errors=fieldErrors.stream().map(FieldError::getDefaultMessage).collect(Collectors.toList());
 		
-		return "admin/equipment-edit";
+		model.addAttribute("warning", errors);
 	}
-	
-	@PostMapping("/equipment/edit")
-	public String saveFormToEditEquipment(@Valid @ModelAttribute("equipment") Equipment equipment, Model model) {
-		
-		try {
-			equipmentService.update(equipment);
-			model.addAttribute("info", "Pomyślnie zaktualizowano sprzęt.");
-		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("warning", "Wystąpił problem z aktualizacją sprzętu.");
-		}
-		
-		return "admin/equipment-edit";
-	}
-	
-	@GetMapping("/equipment/delete")
-	public String deleteEditEquipment(@RequestParam("equipmentId") int id, Model model) {
-		
-		try {
-			equipmentService.delete(id);
-			model.addAttribute("info", "Sprzęt został usunięty.");
-		} catch (ThereIsNoSuchAnEquipmentException e) {
-			e.printStackTrace();
-			model.addAttribute("warning", "Wystąpił problem z usunięciem sprzętu.");
-		}
-		
-		return showEquipment(model);
-	}
-
 }
