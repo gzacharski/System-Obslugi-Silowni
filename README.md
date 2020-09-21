@@ -26,4 +26,6 @@ W systemie wyodrębiono pięć ról użytkowników: *Administrator*, *Manager*, 
 * MySQL 
 * dostęp za pomocą frameworka Hibernate. <br/>
 #### __Integracje__:
-* Google reCAPTCHA.
+* Google reCAPTCHA
+#### __Hosting__:
+* Amazon Web Services
