@@ -1,6 +1,6 @@
-# System obsługi siłowni
+# [System obsługi siłowni](http://mygymapp-env.eba-jpprh8un.eu-central-1.elasticbeanstalk.com/)
 Autorska aplikacja do zarządzania klubem fitness. Napisana i rozwijana w celach edukacyjnych.<br/>
-Umieszczona na AWS i dostępna poprzez [link](http://mygymapp-env.eba-jpprh8un.eu-central-1.elasticbeanstalk.com/).
+Umieszczona na AWS i dostępna poprzez link: http://mygymapp-env.eba-jpprh8un.eu-central-1.elasticbeanstalk.com/.
 ***
 System obsługi siłowni jest aplikacja stworzona w celu ulepszenia zarządzania klubem fitness oraz poprawy jakości obsługi klienta.<br/>
 W systemie wyodrębiono pięć ról użytkowników: *Administrator*, *Manager*, *Pracownik*, *Trener* oraz *Klient*. W celach demonstracyjnych, po zarejestrowaniu się na stronie, nowy użytkownik ma przydzielone wszystkie role oprócz Administratora. W zależności od roli dostępne są poszczególne funkcjonalności: 
