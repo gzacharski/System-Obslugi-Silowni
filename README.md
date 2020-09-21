@@ -3,7 +3,7 @@ Autorska aplikacja do zarządzania klubem fitness. Napisana i rozwijana w celach
 Umieszczona na AWS i dostępna poprzez link: http://mygymapp-env.eba-jpprh8un.eu-central-1.elasticbeanstalk.com/.
 ***
 System obsługi siłowni jest aplikacja stworzona w celu ulepszenia zarządzania klubem fitness oraz poprawy jakości obsługi klienta.<br/>
-W systemie wyodrębiono pięć ról użytkowników: *Administrator*, *Manager*, *Pracownik*, *Trener* oraz *Klient*. W celach demonstracyjnych, po zarejestrowaniu się na stronie, nowy użytkownik ma przydzielone wszystkie role oprócz Administratora. W zależności od roli dostępne są poszczególne funkcjonalności: 
+W systemie wyodrębiono pięć ról użytkowników: *Administrator*, *Manager*, *Pracownik*, *Trener* oraz *Klient*. Po zarejestrowaniu się na stronie, w celach demonstracyjnych, nowy użytkownik ma przydzielone wszystkie role oprócz Administratora. W zależności od roli dostępne są poszczególne funkcjonalności: 
 | Rola       | Funkcjonalności          | Stan  |
 | :------------- |:-------------| :-----|
 | Administrator  | Edycja, usunięcie lub zmiana roli użytkownika. Wyświetlanie/dodawanie/edycja/usuwanie trenerów, zajęć oraz sprzętu fitness | dostępne |
