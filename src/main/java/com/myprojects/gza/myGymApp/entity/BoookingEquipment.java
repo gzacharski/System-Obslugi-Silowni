@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 @Entity
 @Table(name = "booking_equipment_list")
 public class BoookingEquipment {
@@ -23,9 +26,11 @@ public class BoookingEquipment {
 	private int id;
 	
 	@Column(name = "start_time")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime startTime;
 	
 	@Column(name = "end_time")
+	@DateTimeFormat(iso = ISO.DATE_TIME)
 	private LocalDateTime endTime;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
@@ -41,5 +46,61 @@ public class BoookingEquipment {
 	private User user;
 	
 	public BoookingEquipment() {}
+
+	public BoookingEquipment(LocalDateTime startTime, LocalDateTime endTime) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
 	
+	public BoookingEquipment(LocalDateTime startTime, LocalDateTime endTime, Equipment equipment) {
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.equipment = equipment;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+
+	public Equipment getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "BoookingEquipment [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", equipment="
+				+ equipment + ", user=" + user + "]";
+	}
 }

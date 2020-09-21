@@ -15,9 +15,12 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 @Table(name="fitness_events")
@@ -27,12 +30,14 @@ public class FitnessEvent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
-
+	
 	@Column(name="start_time")
 	@DateTimeFormat(iso = ISO.DATE_TIME)
+	@NotNull(message = "Pole musi zostać wypełnione")
 	private LocalDateTime startTime;
 	
 	@Column(name="max_people")
+	@NotNull(message = "Pole musi zostać wypełnione")
 	private int maxPeople;
 	
 	@Column(name="description")
@@ -42,18 +47,21 @@ public class FitnessEvent {
 			CascadeType.PERSIST,CascadeType.REFRESH}, 
 			fetch = FetchType.EAGER)
 	@JoinColumn(name="trainer_id")
+	@NotNull(message = "Pole musi zostać wypełnione")
 	private Trainer trainer;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
 			CascadeType.PERSIST,CascadeType.REFRESH}, 
 			fetch = FetchType.EAGER)
 	@JoinColumn(name="workout_id")
+	@NotNull(message = "Pole musi zostać wypełnione")
 	private Workout workout;
 	
 	@ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
 			CascadeType.PERSIST,CascadeType.REFRESH}, 
 			fetch = FetchType.EAGER)
 	@JoinColumn(name="place_id")
+	@NotNull(message = "Pole musi zostać wypełnione")
 	private Place place;
 	
 	@ManyToMany(cascade = {CascadeType.DETACH,CascadeType.MERGE,

@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.myprojects.gza.myGymApp.helperClasses.View;
+
 @Entity
 @Table(name = "user_details")
 public class UserDetails {
@@ -17,9 +20,11 @@ public class UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
+	@JsonView(View.Details.class)
 	private int id;
 	
 	@Column(name = "photo")
+	@JsonView(View.Details.class)
 	private String photo;
 	
 	@OneToOne(mappedBy = "userDetails", 

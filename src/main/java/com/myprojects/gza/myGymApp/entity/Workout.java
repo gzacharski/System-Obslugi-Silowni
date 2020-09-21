@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import com.myprojects.gza.myGymApp.validation.AcceptableiImageFileExtension;
 
 @Entity
 @Table(name="workouts")
@@ -18,12 +21,14 @@ public class Workout {
 	@Column(name="id")
 	private int id;
 	
+	@NotNull
 	@Column(name="type_of_workout")
 	private String typeOfWorkout;
 	
 	@Column(name="description")
 	private String description;
 	
+	@AcceptableiImageFileExtension
 	@Column(name="image")
 	private String image;
 	

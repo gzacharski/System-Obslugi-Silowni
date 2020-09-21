@@ -22,7 +22,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.myprojects.gza.myGymApp.helperClasses.Roles;
+import com.myprojects.gza.myGymApp.helperClasses.View;
 import com.myprojects.gza.myGymApp.validation.ValidTelephoneNumber;
 
 @Entity
@@ -32,25 +34,30 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
+	@JsonView(View.Summary.class)
 	private int id;
 	
 	@NotNull(message ="Imię użytkownika jest wymagane.")
 	@Size(min = 2, max = 32, message = "Imię użytkownika powinno zawierać od 2 do 32 znaków.")
 	@Column(name="name")
+	@JsonView(View.Summary.class)
 	private String name;
 	
 	@NotNull(message ="Nazwisko użytkownika jest wymagane.")
 	@Size(min = 2, max = 32, message = "Nazwisko użytkownika powinno zawierać od 2 do 32 znaków.")
 	@Column(name="surname")
+	@JsonView(View.Summary.class)
 	private String surname;
 	
 	@Email
 	@NotNull(message ="Adres email jest wymagany.")
 	@Column(name="email")
+	@JsonView(View.Summary.class)
 	private String email;
 	
-	@ValidTelephoneNumber
+	@ValidTelephoneNumber()
 	@Column(name="telephone")
+	@JsonView(View.Summary.class)
 	private String telephone;
 	
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -58,6 +65,7 @@ public class User {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_details_id")
+	@JsonView(View.Details.class)
 	private UserDetails userDetails;
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
