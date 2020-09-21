@@ -154,13 +154,16 @@ public class UserDAOImpl implements UserDAO {
 		
 		Query<User> theQuery=null;
 		
+		List<User> tempUsers=null;
+		
 		if(searchedPhrase!=null && searchedPhrase.trim().length()>0) {
 			theQuery=currentSession.createQuery("from User where lower(name) like :theSearchName "
 					+ "or lower(surname) like :theSearchName or lower(email) like :theSearchName", User.class);
 			theQuery.setParameter("theSearchName", "%"+searchedPhrase+"%");
+			tempUsers=theQuery.getResultList();
 		}
 		
-		return theQuery.getResultList();
+		return tempUsers;
 	}
 
 	@Override

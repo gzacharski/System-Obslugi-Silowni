@@ -79,7 +79,7 @@ public class EquipmentDAOImpl implements EquipmentDAO {
 		
 		if(searchedPhrase!=null && searchedPhrase.trim().length()>0) {
 			query=currenSession.createQuery("from Equipment where lower(name) like :thePhrase"
-					+ "od lower(description) like :thePhrase" , Equipment.class);
+					+ " or lower(description) like :thePhrase" , Equipment.class);
 			query.setParameter("thePhrase", "%"+searchedPhrase+"%");
 		}
 
