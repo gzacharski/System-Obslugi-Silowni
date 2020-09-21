@@ -121,12 +121,12 @@ public class FitnessEventServiceImpl implements FitnessEventService{
 	
 	private Predicate<FitnessEvent> filterToGetEventsInSelectedWeek(LocalDate anyDateOfSelectedWeek){
 		
-		LocalDate mondayOfCurrentWeek=getDateOfMondayOfTheWeek(anyDateOfSelectedWeek);
+		LocalDate sundayOfPreviousWeek=getDateOfMondayOfTheWeek(anyDateOfSelectedWeek).minusDays(1);
 	
-		LocalDate sundayOfCurrentWeek=getDateOfSundayOfTheWeek(anyDateOfSelectedWeek);
+		LocalDate mondayOfNextWeek=getDateOfSundayOfTheWeek(anyDateOfSelectedWeek).plusDays(1);
 		
-		return event -> event.getStartTime().toLocalDate().isAfter(mondayOfCurrentWeek) 
-				&& event.getStartTime().toLocalDate().isBefore(sundayOfCurrentWeek);
+		return event -> event.getStartTime().toLocalDate().isAfter(sundayOfPreviousWeek) 
+				&& event.getStartTime().toLocalDate().isBefore(mondayOfNextWeek);
 	}
 
 	@Override
