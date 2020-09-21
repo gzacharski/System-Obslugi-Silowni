@@ -25,7 +25,7 @@ public class ErrorHandlerFilter extends GenericFilterBean {
 			try {
 				chain.doFilter(request, response);
 			} catch (Exception ex) {
-				request.getRequestDispatcher("/WEB-INF/view/error.jsp").forward(request, response);
+				request.getRequestDispatcher("/WEB-INF/view/errors/error.jsp").forward(request, response);
 			}
 		}
 	}

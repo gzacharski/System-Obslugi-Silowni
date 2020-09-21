@@ -17,7 +17,7 @@ public class TelephoneNumberValidator implements ConstraintValidator<ValidTeleph
 
 		pattern=Pattern.compile(TELEPHONE_NUMBER_PATTERN);
 		
-		if(telephoneNumber==null) {
+		if(telephoneNumber==null || telephoneNumber.trim().length()==0) {
 			return true;
 		}
 		
