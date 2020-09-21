@@ -34,13 +34,7 @@
 				
 				<div class="row">
 				
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/employee/function" method="get"> 
-								<input type="submit" value="Funkcja 1" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
+					<jsp:include page="/WEB-INF/view/components/buttons/users.jsp"/>
 					
 					<div class="col-12 col-md-6 col-lg-4">
 						<figure class="buttonWrapper">

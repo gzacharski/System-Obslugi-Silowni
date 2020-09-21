@@ -6,3 +6,8 @@
 	crossorigin="anonymous"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.bundle.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+<script>
+ 	$('#modalDelete').on('show.bs.modal', function(e) {
+	    $(this).find('#btnDelete').attr('href', $(e.relatedTarget).data('href'));
+	});
+</script>

@@ -41,20 +41,23 @@
 				</div>
 				
 				<div class="row">
-							
-					<jsp:include page="/WEB-INF/view/components/trainer/table-list.jsp"/>
-						
+					<div class="d-flex justify-content-between col-12 my-2">
+						<jsp:include page="/WEB-INF/view/components/trainer/table-list.jsp"/>
+					</div>	
+					
 					<div class="button my-2">
 						<form:form action="${pageContext.request.contextPath}/user/admin/main" method="get"> 
 							<input type="submit" value="Wróć" class="btn btn-secondary">
 						</form:form>
-					</div>
-					
+					</div>	
 				</div>
+				
 			</div>
 		</main>
 		
+		<jsp:include page="/WEB-INF/view/components/modals/confirm-to-delete.jsp"/>
 		<jsp:include page="/WEB-INF/view/components/footer.jsp"/>
 		<jsp:include page="/WEB-INF/view/components/scripts.jsp"/>
+		
 	</body>
 </html>

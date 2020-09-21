@@ -17,11 +17,11 @@
     </tr>
     
     <c:forEach var="event" items="${events}">
-		<c:url var="editEvent" value="/user/admin/events/edit">
+		<c:url var="editEvent" value="/user/events/edit">
 			<c:param name="eventId" value="${event.id}" />
 		</c:url>
 		
-		<c:url var="deleteEvent" value="/user/admin/events/delete">
+		<c:url var="deleteEvent" value="/user/events/delete">
 			<c:param name="eventId" value="${event.id}" />
 		</c:url>
 
@@ -35,8 +35,8 @@
             <td>${event.place.placeName}</td>
             <td>
             	<a href="${editEvent}" class="btn btn-info">Edytuj</a>
-            	<a href="${deleteEvent}" class="btn btn-warning"
-            		onclick="if(!(confirm('Are you sure you want to delete this workout?'))) return false">
+            	<a href="${deleteEvent}" data-href="${deleteEvent}" class="btn btn-warning"
+            		data-toggle="modal" data-target="#modalDelete">
             		Usuń
             	</a>
             </td>

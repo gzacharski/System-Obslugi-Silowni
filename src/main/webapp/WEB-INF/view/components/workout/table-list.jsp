@@ -11,11 +11,11 @@
     </tr>
     
     <c:forEach var="workout" items="${workouts}">
-    	<c:url var="editWorkout" value="/user/admin/workouts/edit">
+    	<c:url var="editWorkout" value="/user/workouts/edit">
 			<c:param name="workoutId" value="${workout.id}" />
 		</c:url>
 		
-		<c:url var="deleteWorkout" value="/user/admin/workouts/delete">
+		<c:url var="deleteWorkout" value="/user/workouts/delete">
 			<c:param name="workoutId" value="${workout.id}" />
 		</c:url>
     	
@@ -25,8 +25,8 @@
             <td>${workout.duration}</td>
             <td>
             	<a href="${editWorkout}" class="btn btn-info">Edytuj</a>
-            	<a href="${deleteWorkout}" class="btn btn-warning"
-            		onclick="if(!(confirm('Are you sure you want to delete this workout?'))) return false">
+            	<a href="${deleteWorkout}" data-href="${deleteWorkout}" class="btn btn-warning"
+            		data-toggle="modal" data-target="#modalDelete">
             		Usuń
             	</a>
             </td>

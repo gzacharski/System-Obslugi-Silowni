@@ -12,22 +12,22 @@
 	</tr>
     
     <c:forEach var="equipment" items="${equipments}">
-	    <c:url var="editEquipment" value="/user/admin/equipment/edit">
+	    <c:url var="editEquipment" value="/user/equipments/edit">
 			<c:param name="equipmentId" value="${equipment.id}" />
 		</c:url>
 		
-		<c:url var="deleteEquipment" value="/user/admin/equipment/delete">
+		<c:url var="deleteEquipment" value="/user/equipments/delete">
 			<c:param name="equipmentId" value="${equipment.id}" />
 		</c:url>
         	
        <tr>
-               <td>${equipment.id}</td>
+           <td>${equipment.id}</td>
            <td>${equipment.name}</td>
            <td>${equipment.quantity}</td>
            <td>
            	<a href="${editEquipment}" class="btn btn-info">Edytuj</a>
-           	<a href="${deleteEquipment}" class="btn btn-warning"
-           		onclick="if(!(confirm('Are you sure you want to delete this workout?'))) return false">
+           	<a href="${deleteEquipment}" data-href="${deleteEquipment}" class="btn btn-warning"
+           		data-toggle="modal" data-target="#modalDelete">
            		Usuń
            	</a>
            </td>

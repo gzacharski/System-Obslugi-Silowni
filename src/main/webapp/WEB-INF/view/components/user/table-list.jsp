@@ -9,30 +9,36 @@
         <th>Imię</th>
         <th>Nazwisko</th>
         <th>Email</th>
-        <th>Zarządzaj kontem</th>
+        <security:authorize access="hasRole('ROLE_ADMIN')">
+        	<th>Zarządzaj kontem</th>
+        </security:authorize>
     </tr>
     
     <c:forEach var="user" items="${users}">
-    	<c:url var="editUser" value="/user/admin/editUser">
-			<c:param name="userId" value="${user.id}" />
-		</c:url>
-		
-		<c:url var="deleteUser" value="/user/admin/deleteUser">
-			<c:param name="userId" value="${user.id}" />
-		</c:url>
+    	<security:authorize access="hasRole('ROLE_ADMIN')">
+	    	<c:url var="editUser" value="/user/admin/editUser">
+				<c:param name="userId" value="${user.id}" />
+			</c:url>
+			
+			<c:url var="deleteUser" value="/user/admin/deleteUser">
+				<c:param name="userId" value="${user.id}" />
+			</c:url>
+		</security:authorize>
 
         <tr>
             <td>${user.id}</td>
             <td>${user.name}</td>
             <td>${user.surname}</td>
             <td>${user.email}</td>
-            <td>
-            	<a href="${editUser}" class="btn btn-info">Edytuj</a>
-            	<a href="${deleteUser}" class="btn btn-warning"
-            		onclick="if(!(confirm('Are you sure you want to delete this customer?'))) return false">
-            		Usuń
-            	</a>
-            </td>
+           	<security:authorize access="hasRole('ROLE_ADMIN')">
+	            <td>
+	            	<a href="${editUser}" class="btn btn-info">Edytuj</a>
+	            	<a href="${deleteUser}" data-href="${deleteUser}" class="btn btn-warning" 
+	            		data-toggle="modal" data-target="#modalDelete">
+	            		Usuń
+	            	</a>
+	            </td>
+            </security:authorize>
         </tr>
         
     </c:forEach>

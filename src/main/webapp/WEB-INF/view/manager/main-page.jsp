@@ -22,7 +22,7 @@
 					<div class="col-12 mt-3">
 						<figure class="headerTile">
 							<jsp:include page="/WEB-INF/view/components/bootstrap-icons/person-circle.jsp"/>
-							<span>Witaj Manegerze: <security:authentication property="principal.username"/></span>
+							<span>Witaj Managerze: <security:authentication property="principal.username"/></span>
 							<br>
 							<span>Jakie zadania na dziś?</span>
 						</figure>
@@ -30,54 +30,14 @@
 				</div>
 
 				<div class="row">
+				
+					<jsp:include page="/WEB-INF/view/components/buttons/users.jsp"/>
+					<jsp:include page="/WEB-INF/view/components/buttons/fitness-events.jsp"/>
+					<jsp:include page="/WEB-INF/view/components/buttons/toBeContinue.jsp"/>
 					
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/manager/function" method="get"> 
-								<input type="submit" value="Funkcja 1" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
-					
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/manager/function" method="get"> 
-								<input type="submit" value="Funkcja 2" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
-					
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/manager/function" method="get"> 
-								<input type="submit" value="Funkcja 3" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
-
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/manager/function" method="get"> 
-								<input type="submit" value="Funkcja 4" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
-					
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/manager/function" method="get"> 
-								<input type="submit" value="Funkcja 5" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
-					
-					<div class="col-12 col-md-6 col-lg-4">
-						<figure class="buttonWrapper">
-							<form:form action="${pageContext.request.contextPath}/user/manager/function" method="get"> 
-								<input type="submit" value="Funkcja 6" class="tileButton">
-							</form:form>
-						</figure>
-					</div>
+					<jsp:include page="/WEB-INF/view/components/buttons/trainingRooms.jsp"/>
+					<jsp:include page="/WEB-INF/view/components/buttons/workouts.jsp"/>
+					<jsp:include page="/WEB-INF/view/components/buttons/equipments.jsp"/>
 
 				</div>
 			</div>

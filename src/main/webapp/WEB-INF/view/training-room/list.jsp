@@ -19,37 +19,38 @@
 			<div class="container">
 				
 				<div class="headerTile my-2">
-					Lista dostępnych treningów<br/>
+					Lista miejsc treningowych<br/>
 				</div>
 				
 				<div class="d-flex justify-content-between col-12 my-2">
-					<form:form action="${pageContext.request.contextPath}/user/admin/workouts/add" method="get">
-						<input type="submit" value="Dodaj trening" class="btn btn-secondary float-left mx-2">
+				
+					<form:form action="${pageContext.request.contextPath}/user/trainingRooms/add" method="get">
+						<input type="submit" value="Dodaj nową salę treningową" class="btn btn-secondary float-left mx-2">
 					</form:form>
 					
-					<form:form action="${pageContext.request.contextPath}/user/admin/workout/search" method="get" cssClass="input-group">
+					<form:form action="${pageContext.request.contextPath}/user/trainingRooms/search" method="get" cssClass="input-group">
 						<div class="input-group-prepend">
 							 <span class="input-group-text" id="basic-addon1">
 							   <jsp:include page="/WEB-INF/view/components/bootstrap-icons/search.jsp"/>
 							</span>
 						</div>
-						<input type="text" name="searchedPhrase" placeholder="Szukaj treningu" class="form-control">
+						<input type="text" name="searchedPhrase" placeholder="Szukaj sali treningowej" class="form-control" readonly="true">
 						<div class="input-group-append">
-							<input type="submit" value="Szukaj" class="btn btn-secondary float-right">
+							<input type="submit" value="Szukaj" class="btn btn-secondary float-right" disabled>
 						</div>
 					</form:form>
 				</div>
-		
+				
 				<div class="row">
 					<div class="d-flex justify-content-between col-12 my-2">
-						<jsp:include page="/WEB-INF/view/components/workout/table-list.jsp"/>
+						<jsp:include page="/WEB-INF/view/components/trainingRoom/table-list.jsp"/>
 					</div>
-
+					
 					<div class="button my-2">
-						<form:form action="${pageContext.request.contextPath}/user/admin/main" method="get"> 
+						<form:form action="${pageContext.request.contextPath}/user/" method="get"> 
 							<input type="submit" value="Wróć" class="btn btn-secondary">
 						</form:form>
-					</div>
+					</div>	
 				</div>
 				
 			</div>

@@ -34,33 +34,9 @@
 
 						<div class="row">
 
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-								
-									<form:form id="userAccounts" action="${pageContext.request.contextPath}/user/admin/users" method="get"> 
-										<button type="submit" class="tileButton" form="userAccounts">
-											<span class="text-center">Zarządzaj kontami</span>
-											<span style="font-size: 1.2em;">
-												<jsp:include page="/WEB-INF/view/components/bootstrap-icons/people-fill.jsp"/>
-											</span>
-										</button>
-									</form:form>
-									
-								</figure>
-							</div>
+							<jsp:include page="/WEB-INF/view/components/buttons/users.jsp"/>
+							<jsp:include page="/WEB-INF/view/components/buttons/fitness-events.jsp"/>
 
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form:form id="fitnessEvents" action="${pageContext.request.contextPath}/user/admin/events" method="get"> 
-										<button type="submit" class="tileButton" form="fitnessEvents">
-											<span class="text-center">Zarządzaj zajęciami</span>
-											<span style="font-size: 1.2em;">
-												<jsp:include page="/WEB-INF/view/components/bootstrap-icons/list-check.jsp"/>
-											</span>
-										</button>
-									</form:form>
-								</figure>
-							</div>
 
 							<div class="col-12 col-md-6 col-lg-4">
 								<figure class="buttonWrapper">
@@ -69,30 +45,12 @@
 									</form:form>
 								</figure>
 							</div>
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form:form action="${pageContext.request.contextPath}/user/admin/trainingRooms" method="get"> 
-										<input type="submit" value="Zarządzaj salami treningowymi" class="tileButton">
-									</form:form>
-								</figure>
-							</div>
-
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form:form action="${pageContext.request.contextPath}/user/admin/workouts" method="get"> 
-										<input type="submit" value="Zarządzaj typami treningu" class="tileButton">
-									</form:form>
-								</figure>
-							</div>
 							
-							<div class="col-12 col-md-6 col-lg-4">
-								<figure class="buttonWrapper">
-									<form:form action="${pageContext.request.contextPath}/user/admin/equipment" method="get"> 
-										<input type="submit" value="Zarządzaj sprzętem" class="tileButton">
-									</form:form>
-								</figure>
-							</div>
+							<jsp:include page="/WEB-INF/view/components/buttons/trainingRooms.jsp"/>
+							<jsp:include page="/WEB-INF/view/components/buttons/workouts.jsp"/>
+							<jsp:include page="/WEB-INF/view/components/buttons/equipments.jsp"/>
+							
+
 							
 							<div class="col-12 col-md-6 col-lg-4">
 								<figure class="buttonWrapper">

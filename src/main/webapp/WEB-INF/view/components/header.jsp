@@ -51,27 +51,27 @@
 
 							<security:authorize access="hasRole('ROLE_ADMIN')">
 								<button form="adminRole" class="dropdown-item" style="text-align: center; cursor: pointer">Admin</button>
-								<form:form id="adminRole" action="${pageContext.request.contextPath}/user/admin/main" method="GET"/>
+								<form:form id="adminRole" action="${pageContext.request.contextPath}/user/setLeadingRole/ROLE_ADMIN" method="GET"/>
 							</security:authorize>
 							
 							<security:authorize access="hasRole('ROLE_EMPLOYEE')">
 								<button form="employeeRole" class="dropdown-item" style="text-align: center; cursor: pointer">Pracownik</button>
-								<form:form id="employeeRole" action="${pageContext.request.contextPath}/user/employee/main" method="GET"/>
+								<form:form id="employeeRole" action="${pageContext.request.contextPath}/user/setLeadingRole/ROLE_EMPLOYEE" method="GET"/>
 							</security:authorize>
 							
 							<security:authorize access="hasRole('ROLE_TRAINER')">
 								<button form="trainerRole" class="dropdown-item" style="text-align: center; cursor: pointer">Trener</button>
-								<form:form id="trainerRole" action="${pageContext.request.contextPath}/user/trainer/main" method="GET"/>
+								<form:form id="trainerRole" action="${pageContext.request.contextPath}/user/setLeadingRole/ROLE_TRAINER" method="GET"/>
 							</security:authorize>
 							
 							<security:authorize access="hasRole('ROLE_CLIENT')">
 								<button form="clientRole" class="dropdown-item" style="text-align: center; cursor: pointer">Klient</button>
-								<form:form id="clientRole" action="${pageContext.request.contextPath}/user/client/main" method="GET"/>
+								<form:form id="clientRole" action="${pageContext.request.contextPath}/user/setLeadingRole/ROLE_CLIENT" method="GET"/>
 							</security:authorize>
 							
 							<security:authorize access="hasRole('ROLE_MANAGER')">
 								<button form="managerRole" class="dropdown-item" style="text-align: center; cursor: pointer">Manager</button>
-								<form:form id="managerRole" action="${pageContext.request.contextPath}/user/manager/main" method="GET"/>
+								<form:form id="managerRole" action="${pageContext.request.contextPath}/user/setLeadingRole/ROLE_MANAGER" method="GET"/>
 							</security:authorize>
 							
 								

@@ -12,11 +12,11 @@
     
     <c:forEach var="place" items="${places}">
        
-       	<c:url var="editTrainingRoom" value="/user/admin/trainingRooms/edit">
+       	<c:url var="editTrainingRoom" value="/user/trainingRooms/edit">
 		<c:param name="trainingRoomId" value="${place.id}" />
 		</c:url>
 		
-		<c:url var="deleteTrainingRoom" value="/user/admin/trainingRooms/delete">
+		<c:url var="deleteTrainingRoom" value="/user/trainingRooms/delete">
 			<c:param name="trainingRoomId" value="${place.id}" />
 		</c:url>
 
@@ -25,9 +25,9 @@
 	         <td>${place.placeName}</td>
 	         <td><span class="d-inline-block text-truncate" style="max-width: 600px;">${place.description}</span></td>
 	         <td><a href="${editTrainingRoom}" class="btn btn-info">Edytuj</a>
-	         	<a href="${deleteTrainingRoom}" class="btn btn-warning"
-	         		onclick="if(!(confirm('Are you sure you want to delete this training room?'))) return false">
-	         		Usuń
+	         	<a href="${deleteTrainingRoom}" data-href="${deleteTrainingRoom}" class="btn btn-warning"
+	         		data-toggle="modal" data-target="#modalDelete">
+            		Usuń
 	         	</a>
 	         </td>
         </tr>

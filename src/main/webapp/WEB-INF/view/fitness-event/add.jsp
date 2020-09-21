@@ -25,7 +25,7 @@
 						Dodaj nowe zajęcia<br/>
 					</div>
 						
-					<form:form id="saveForm" action="${pageContext.request.contextPath}/user/admin/events/add" modelAttribute="fitnessEvent" 
+					<form:form id="saveForm" action="${pageContext.request.contextPath}/user/events/add" modelAttribute="fitnessEvent" 
 							method="post" cssClass="form-group col-sm-12 col-4">
 						<jsp:include page="/WEB-INF/view/components/fitnessEvent/info.jsp"/>
 					</form:form>
@@ -33,7 +33,7 @@
 					
 				<div class="row">
 			       <div class="d-flex justify-content-between col-12 my-2">
-				       	<form:form action="${pageContext.request.contextPath}/user/admin/events" method="get"> 
+				       	<form:form action="${pageContext.request.contextPath}/user/events/" method="get"> 
 							<button type="submit" class="btn btn-secondary float-left">Powrót</button>
 						</form:form>
 				     	

@@ -1,4 +1,6 @@
+<%@	page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
@@ -17,28 +19,31 @@
 		
 		<main>
 			<div class="container">
+			
+				<div class="row">
 				
-				<div class="headerTile my-2">
-					Lista dostępnego sprzętu<br/>
-				</div>
+					<div class="headerTile col-12 my-2">
+						Dodaj miejce treningowe
+					</div>	
 				
-				<div class="d-flex justify-content-between col-12 my-2">
-					<form:form action="${pageContext.request.contextPath}/user/admin/equipment/add" method="get">
-						<input type="submit" value="Dodaj sprzęt" class="btn myButton float-left">
+					<form:form id="saveForm" action="${pageContext.request.contextPath}/user/trainingRooms/add" 
+						modelAttribute="place" method="post" cssClass="form-group col-sm-12 col-4">
+						<jsp:include page="/WEB-INF/view/components/trainingRoom/info.jsp"/>
 					</form:form>
 				</div>
-						
+				
 				<div class="row">
-					
-					<jsp:include page="/WEB-INF/view/components/equipment/table-list.jsp"/>
-					
-					<div class="button my-2">
-						<form:form action="${pageContext.request.contextPath}/user/admin/main" method="get"> 
-							<input type="submit" value="Wróć" class="btn myButton">
+			       <div class="d-flex justify-content-between col-12 my-2">
+				       	<form:form action="${pageContext.request.contextPath}/user/trainingRooms/" method="get"> 
+							<button type="submit" class="btn btn-secondary float-left">Powrót</button>
+						</form:form>
+				     	
+						<form:form>
+							<button type="submit" class="btn btn-secondary float-right" form="saveForm">Dodaj</button> 
 						</form:form>
 					</div>
-					
 				</div>
+						
 			</div>
 		</main>
 		

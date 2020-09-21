@@ -29,11 +29,12 @@
             <td>${trainer.user.email}</td>
             <td>
             	<a href="${editTrainer}" class="btn btn-info">Edytuj</a>
-            	<a href="${deleteTrainer}" class="btn btn-warning"
-            		onclick="if(!(confirm('Are you sure you want to delete this trainer?'))) return false">
+            	<a href="${deleteTrainer}" data-href="${deleteTrainer}" class="btn btn-warning"  
+            		data-toggle="modal" data-target="#modalDelete">
             		Usuń
             	</a>
             </td>
         </tr>
     </c:forEach>
 </table>
+
