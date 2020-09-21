@@ -132,7 +132,13 @@
 	<dependency>
 		<groupId>com.fasterxml.jackson.core</groupId>
 		<artifactId>jackson-databind</artifactId>
-		<version>2.11.1</version>
+		<version>2.11.2</version>
+	</dependency>
+	
+	<dependency>
+	  <groupId>com.fasterxml.jackson.datatype</groupId>
+	  <artifactId>jackson-datatype-hibernate5</artifactId>
+	  <version>2.11.2</version>
 	</dependency>
 	
 	<!-- Hibernate Validator -->
@@ -208,16 +214,24 @@
 
   <build>
     <finalName>myCoolGymApp</finalName>
-    
+
     <pluginManagement>
 	   	<plugins>
-	   	
 			<plugin>
 				<!-- Add Maven coordinates (GAV) for: maven-war-plugin -->
 			    <groupId>org.apache.maven.plugins</groupId>
 			    <artifactId>maven-war-plugin</artifactId>
-			    <version>3.3.0</version>					
-			</plugin>		
+			    <version>3.3.0</version>
+			    <configuration>
+			    	<webResources>
+			    		<webResource>
+			    			<directory>WebContent/</directory>
+			    		</webResource>
+			    	</webResources>
+			    </configuration>
+			</plugin>
+			
+					
 							
 		</plugins>
 	</pluginManagement>
