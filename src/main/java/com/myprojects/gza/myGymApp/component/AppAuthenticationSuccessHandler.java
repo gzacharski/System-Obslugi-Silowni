@@ -56,10 +56,11 @@ public class AppAuthenticationSuccessHandler implements AuthenticationSuccessHan
 		
 		logger.info(user.toString());
 		
-		String redirectUrl=redirection.getHomePageByUserRole(authentication.getAuthorities());
+		//String redirectUrl=redirection.getHomePageByUserRole(authentication.getAuthorities());
+		String redirectUrl="/user/";
 		
-		HttpSession session=request.getSession();
-		session.setAttribute("user", user);
+//		HttpSession session=request.getSession();
+//		session.setAttribute("user", user);
 		
 		ZoneId zoneId=ZoneId.systemDefault();
 		TimeZone timeZone=TimeZone.getTimeZone(zoneId);
