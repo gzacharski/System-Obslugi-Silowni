@@ -1,6 +1,7 @@
 package com.myprojects.gza.myGymApp.config;
 
 import java.beans.PropertyVetoException;
+import java.util.List;
 import java.util.Properties;
 
 import javax.sql.DataSource;
@@ -14,6 +15,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -23,6 +26,8 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 @Configuration
@@ -31,7 +36,8 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 @EnableWebMvc
 @ComponentScan("com.myprojects.gza.myGymApp")
 @PropertySources({
-	@PropertySource("classpath:persistence-mysql.properties")
+	//@PropertySource("classpath:local-mysql.properties"),
+	@PropertySource("classpath:aws-mysql.properties")
 })
 public class AppConfig implements WebMvcConfigurer{
 
@@ -116,4 +122,15 @@ public class AppConfig implements WebMvcConfigurer{
 		int tempInt=Integer.parseInt(tempString);
 		return tempInt;
 	}
+	
+//	@Override
+//	public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+//		
+//		for(HttpMessageConverter<?> converter: converters) {
+//			if(converter instanceof MappingJackson2HttpMessageConverter) {
+//				ObjectMapper mapper=((MappingJackson2HttpMessageConverter) converter).getObjectMapper();
+//				mapper.registerModules(new Hibernate5Module());
+//			}
+//		}
+//	}
 }

@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.myprojects.gza.myGymApp.component.AppAuthenticationSuccessHandler;
 import com.myprojects.gza.myGymApp.component.AppLogoutSuccessHandler;
 import com.myprojects.gza.myGymApp.filter.CaptchaAuthenticationFilter;
-import com.myprojects.gza.myGymApp.filter.CustomFilter;
 import com.myprojects.gza.myGymApp.service.UserService;
 
 @Configuration
@@ -50,7 +49,18 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/user/employee/**").hasRole("EMPLOYEE")
 				.antMatchers("/user/manager/**").hasRole("MANAGER")
 				.antMatchers("/user/trainer/**").hasRole("TRAINER")
+				
 				.antMatchers("/user/").hasAnyRole("ADMIN","CLIENT","EMPLOYEE","MANAGER","TRAINER")
+				
+				.antMatchers("/user/users/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE","TRAINER")
+				
+				.antMatchers("/user/events/**").hasAnyRole("ADMIN","MANAGER")
+				.antMatchers("/user/equipments/**").hasAnyRole("ADMIN","MANAGER","EMPLOYEE")
+				
+				.antMatchers("/user/trainingRooms/**").hasAnyRole("ADMIN","MANAGER")
+				.antMatchers("/user/trainers/**").hasAnyRole("ADMIN","MANAGER")
+				.antMatchers("/user/workouts/**").hasAnyRole("ADMIN","MANAGER")
+				
 				.antMatchers("/").permitAll()
 				.antMatchers("/trainers").permitAll()
 				.antMatchers("/workouts").permitAll()
@@ -65,8 +75,8 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutSuccessHandler(appLogoutSuccessHandler)
+				.deleteCookies("leadingRole", "JSESSIONID")
 				.invalidateHttpSession(true)
-				.deleteCookies("JSESSIONID")
 				.logoutSuccessUrl("/logIn?logout=true")
 				.permitAll()
 			.and()
