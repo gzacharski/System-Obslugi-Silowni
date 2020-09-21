@@ -17,7 +17,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.myprojects.gza.myGymApp.dao.PasswordDAO;
 import com.myprojects.gza.myGymApp.dao.RoleDAO;
 import com.myprojects.gza.myGymApp.dao.TrainerDAO;
 import com.myprojects.gza.myGymApp.dao.UserDAO;
@@ -39,9 +38,6 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired
 	private TrainerDAO trainerDAO;
-	
-	@Autowired
-	private PasswordDAO passwordDAO;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -84,7 +80,11 @@ public class UserServiceImpl implements UserService{
 		
 		user.setPassword(password);
 		
-		user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_CLIENT")));
+		Collection<Role> roles=roleDao.getAllRoles();
+		roles.remove(roleDao.findRoleByName("ROLE_AdMIN"));
+		
+		//user.setRoles(Arrays.asList(roleDao.findRoleByName("ROLE_CLIENT")));
+		user.setRoles(roles);
 		
 		System.out.println(user.toString()+"-"+password.toString());
 		
